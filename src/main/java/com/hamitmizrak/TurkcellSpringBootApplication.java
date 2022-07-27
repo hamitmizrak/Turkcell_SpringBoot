@@ -11,6 +11,9 @@ public class TurkcellSpringBootApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(TurkcellSpringBootApplication.class, args);
+		
+		System.setProperty("spring.devtools.restart.enabled", "true");
+		System.setProperty("java.awt.headless", "false"); // Disables headless
 	}
 	
 }
