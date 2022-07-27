@@ -1,5 +1,7 @@
 package com.hamitmizrak.ui.mvc;
 
+import com.hamitmizrak.dto.ProductDto;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,11 +29,22 @@ public class ThymeleafController {
 		return "thymeleaf3";
 	}
 	
+	// ModelMapper => String
 	// http://localhost:8080/controller/4
 	@GetMapping("/controller/4")
 	public String getThymeleaf4(Model model) {
 		model.addAttribute("controller_key", "Ben Javadan Geldim");
 		return "thymeleaf4";
+	}
+	
+	// ModelMapper => Object
+	// http://localhost:8080/controller/5
+	@GetMapping("/controller/5")
+	public String getThymeleaf5(Model model) {
+		ProductDto productDto = ProductDto.builder().productId(0L).productName("ürün adı")
+				.productCode("ürün kodu 1254X").build();
+		model.addAttribute("controller_key", productDto);
+		return "thymeleaf5";
 	}
 	
 }
