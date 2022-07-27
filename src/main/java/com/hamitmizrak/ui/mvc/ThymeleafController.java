@@ -1,5 +1,9 @@
 package com.hamitmizrak.ui.mvc;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import com.hamitmizrak.dto.ProductDto;
 
 import org.springframework.stereotype.Controller;
@@ -7,7 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.log4j.Log4j2;
+
 @Controller
+@Log4j2
 public class ThymeleafController {
 	
 	// http://localhost:8080/controller/1
@@ -45,6 +52,22 @@ public class ThymeleafController {
 				.productCode("ürün kodu 1254X").build();
 		model.addAttribute("controller_key", productDto);
 		return "thymeleaf5";
+	}
+	
+	// ModelMapper => List<Object>
+	// http://localhost:8080/controller/6
+	@GetMapping("/controller/6")
+	public String getThymeleaf6(Model model) {
+		List<ProductDto> listem = new ArrayList<>();
+		for (int i = 1; i <= 10; i++) {
+			UUID uuid = UUID.randomUUID();
+			listem.add(ProductDto.builder().productId(Long.valueOf(i)).productName("ürün adı: " + i)
+					.productCode(uuid.toString()).build());
+		}
+		;
+		model.addAttribute("controller_key", listem);
+		log.info(listem);
+		return "thymeleaf6";
 	}
 	
 }
