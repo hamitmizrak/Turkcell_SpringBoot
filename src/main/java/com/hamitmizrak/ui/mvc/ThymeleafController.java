@@ -70,4 +70,20 @@ public class ThymeleafController {
 		return "thymeleaf6";
 	}
 	
+	// ModelMapper => List<Object> if,else
+	// http://localhost:8080/controller/7
+	@GetMapping("/controller/6")
+	public String getThymeleaf7(Model model) {
+		List<ProductDto> listem = new ArrayList<>();
+		for (int i = 1; i <= 10; i++) {
+			UUID uuid = UUID.randomUUID();
+			listem.add(ProductDto.builder().productId(Long.valueOf(i)).productName("ürün adı: " + i)
+					.productCode(uuid.toString()).build());
+		}
+		;
+		model.addAttribute("controller_key", listem);
+		log.info(listem);
+		return "thymeleaf7";
+	}
+	
 }
