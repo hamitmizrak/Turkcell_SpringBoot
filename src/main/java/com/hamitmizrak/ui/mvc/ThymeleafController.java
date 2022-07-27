@@ -14,4 +14,10 @@ public class ThymeleafController {
 		return "html sayfasız merhabalar";
 	}
 	
+	// http://localhost:8080/controller/2
+	@GetMapping("/controller/2")
+	public String getThymeleaf2() {
+		return "thymeleaf1";
+	}
+	
 }
