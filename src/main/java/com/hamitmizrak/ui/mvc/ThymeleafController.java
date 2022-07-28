@@ -147,7 +147,6 @@ public class ThymeleafController {
 	}
 	
 	/////////// @RequestParam///////////////////////////////////////////////////////////////
-	
 	// ModelMapper => @RequestParam
 	// http://localhost:8080/template/thymeleaf12?id=44
 	// @GetMApping sonuna bir işlem yapmayan slash koymalayalım yoksa yeni
@@ -158,6 +157,20 @@ public class ThymeleafController {
 				.productCode("ürün kodu 1254X").build();
 		model.addAttribute("controller_key", productDto);
 		return "thymeleaf12";
+	}
+	
+	// ModelMapper => @RequestParam
+	// http://localhost:8080/template/thymeleaf12_1
+	// http://localhost:8080/template/thymeleaf12_1?id=44
+	// @GetMApping sonuna bir işlem yapmayan slash koymalayalım yoksa yeni
+	// attirbuters ister
+	@GetMapping("/template/thymeleaf12_1")
+	public String getThymeleaf12_1(Model model,
+			@RequestParam(name = "id", required = false, defaultValue = "1") Long id) {
+		ProductDto productDto = ProductDto.builder().productId(id).productName("ürün adı")
+				.productCode("ürün kodu 1254X").build();
+		model.addAttribute("controller_key", productDto);
+		return "thymeleaf12_1";
 	}
 	
 	// ModelMapper => @RequestParam
@@ -173,6 +186,21 @@ public class ThymeleafController {
 				.build();
 		model.addAttribute("controller_key", productDto);
 		return "thymeleaf13";
+	}
+	
+	/////////// @PathVariable @RequestParam/////////// /////////// ///////////
+	/////////// ///////////
+	
+	// http://localhost:8080/template/thymeleaf14/44?product=Bilgisayar&product_code=code444
+	@GetMapping("/template/thymeleaf14/{id}")
+	public String getThymeleaf14(Model model, @PathVariable(name = "id") Long id,
+			@RequestParam(name = "product") String product, @RequestParam(name = "product_code") String productCode
+	
+	) {
+		ProductDto productDto = ProductDto.builder().productId(id).productName(product).productCode(productCode)
+				.build();
+		model.addAttribute("controller_key", productDto);
+		return "thymeleaf14";
 	}
 	
 	/////////// otherfile///////////////////////////////////////////////////////////////
