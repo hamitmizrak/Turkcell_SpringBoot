@@ -235,7 +235,6 @@ public class ThymeleafController {
 					.productCode("ürün kodu 1254X").build();
 			model.addAttribute("controller_key", productDto);
 		}
-		return "thymeleaf15";
 		return "admin/thymeleaf16";
 	}
 	
