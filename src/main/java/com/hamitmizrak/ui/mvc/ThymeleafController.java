@@ -237,5 +237,4 @@ public class ThymeleafController {
 		}
 		return "admin/thymeleaf16";
 	}
-	
 }
