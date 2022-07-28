@@ -203,6 +203,25 @@ public class ThymeleafController {
 		return "thymeleaf14";
 	}
 	
-	/////////// otherfile///////////////////////////////////////////////////////////////
+	/////////// validation///////////////////////////////////////////////////////////////////
+	
+	// http://localhost:8080/template/thymeleaf15
+	// http://localhost:8080/template/thymeleaf15/0
+	// http://localhost:8080/template/thymeleaf15/44
+	@GetMapping({ "/template/thymeleaf15", "/template/thymeleaf15/{id}" })
+	public String getThymeleaf15(Model model, @PathVariable(name = "id", required = false) Long id) {
+		if (id == null) {
+			model.addAttribute("validation_key", "not found");
+		} else if (id == 0) {
+			model.addAttribute("validation_key", "bad request");
+		} else {
+			ProductDto productDto = ProductDto.builder().productId(id).productName("ürün adı")
+					.productCode("ürün kodu 1254X").build();
+			model.addAttribute("controller_key", productDto);
+		}
+		return "thymeleaf15";
+	}
+	
+	/////////// otherfile///////////////////////////////////////////////////////////////////
 	
 }
