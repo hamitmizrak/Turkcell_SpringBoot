@@ -1,1 +1,1 @@
-alert("Merhabalar")
+//alert("Merhabalar")
