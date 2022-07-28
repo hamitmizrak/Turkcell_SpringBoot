@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.log4j.Log4j2;
@@ -124,7 +125,7 @@ public class ThymeleafController {
 		model.addAttribute("controller_key", productDto);
 		return "thymeleaf10";
 	}
-	// 1:informatin
+	// 1:information
 	// 2:succes
 	// 3:redirect
 	// 4:client
@@ -133,7 +134,7 @@ public class ThymeleafController {
 	// ModelMapper => @PathVariable
 	// http://localhost:8080/template/thymeleaf11
 	// http://localhost:8080/template/thymeleaf11/44
-	// http://localhost:8080/template/thymeleaf11/44
+	// http://localhost:8080/template/thymeleaf11/44/
 	// http://localhost:8080/template/thymeleaf11/44/Bilgisayarurunu
 	@GetMapping({ "/template/thymeleaf11/", "/template/thymeleaf11/{id}", "/template/thymeleaf11/{urun}",
 			"/template/thymeleaf11/{id}/{urun}" })
@@ -145,5 +146,20 @@ public class ThymeleafController {
 		return "thymeleaf11";
 	}
 	
-	/////////// @PathVariable///////////////////////////////////////////////////////////////
+	/////////// @RequestParam///////////////////////////////////////////////////////////////
+	
+	// ModelMapper => @RequestParam
+	// http://localhost:8080/template/thymeleaf12?id=44
+	// @GetMApping sonuna bir işlem yapmayan slash koymalayalım yoksa yeni
+	// attirbuters ister
+	@GetMapping("/template/thymeleaf12")
+	public String getThymeleaf12(Model model, @RequestParam(name = "id") Long id) {
+		ProductDto productDto = ProductDto.builder().productId(id).productName("ürün adı")
+				.productCode("ürün kodu 1254X").build();
+		model.addAttribute("controller_key", productDto);
+		return "thymeleaf12";
+	}
+	
+	/////////// otherfile///////////////////////////////////////////////////////////////
+	
 }
