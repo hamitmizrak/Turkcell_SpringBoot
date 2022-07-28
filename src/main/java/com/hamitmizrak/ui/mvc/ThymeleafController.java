@@ -226,9 +226,16 @@ public class ThymeleafController {
 	// http://localhost:8080/template/thymeleaf16/44
 	@GetMapping({ "/template/thymeleaf16", "/template/thymeleaf16/{id}" })
 	public String getThymeleaf16(Model model, @PathVariable(name = "id", required = false) Long id) {
-		ProductDto productDto = ProductDto.builder().productId(id).productName("ürün adı")
-				.productCode("ürün kodu 1254X").build();
-		model.addAttribute("controller_key", productDto);
+		if (id == null) {
+			model.addAttribute("validation_key", "not found");
+		} else if (id == 0) {
+			model.addAttribute("validation_key", "bad request");
+		} else {
+			ProductDto productDto = ProductDto.builder().productId(id).productName("ürün adı")
+					.productCode("ürün kodu 1254X").build();
+			model.addAttribute("controller_key", productDto);
+		}
+		return "thymeleaf15";
 		return "admin/thymeleaf16";
 	}
 	
