@@ -103,6 +103,7 @@ public class ThymeleafController {
 		return "thymeleaf8";
 	}
 	
+	/////////// @PathVariable///////////////////////////////////////////////////////////////
 	// ModelMapper => @PathVariable
 	// http://localhost:8080/template/thymeleaf9/44
 	@GetMapping("/template/thymeleaf9/{id}")
@@ -123,5 +124,26 @@ public class ThymeleafController {
 		model.addAttribute("controller_key", productDto);
 		return "thymeleaf10";
 	}
+	// 1:informatin
+	// 2:succes
+	// 3:redirect
+	// 4:client
+	// 5:server
 	
+	// ModelMapper => @PathVariable
+	// http://localhost:8080/template/thymeleaf11
+	// http://localhost:8080/template/thymeleaf11/44
+	// http://localhost:8080/template/thymeleaf11/44
+	// http://localhost:8080/template/thymeleaf11/44/Bilgisayarurunu
+	@GetMapping({ "/template/thymeleaf11/", "/template/thymeleaf11/{id}", "/template/thymeleaf11/{urun}",
+			"/template/thymeleaf11/{id}/{urun}" })
+	public String getThymeleaf11(Model model, @PathVariable(name = "id", required = false) Long id,
+			@PathVariable(name = "urun", required = false) String urun) {
+		ProductDto productDto = ProductDto.builder().productId(id).productName(urun).productCode("ürün kodu 1254X")
+				.build();
+		model.addAttribute("controller_key", productDto);
+		return "thymeleaf11";
+	}
+	
+	/////////// @PathVariable///////////////////////////////////////////////////////////////
 }
