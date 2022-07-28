@@ -223,5 +223,13 @@ public class ThymeleafController {
 	}
 	
 	/////////// otherfile///////////////////////////////////////////////////////////////////
+	// http://localhost:8080/template/thymeleaf16/44
+	@GetMapping({ "/template/thymeleaf16", "/template/thymeleaf16/{id}" })
+	public String getThymeleaf16(Model model, @PathVariable(name = "id", required = false) Long id) {
+		ProductDto productDto = ProductDto.builder().productId(id).productName("ürün adı")
+				.productCode("ürün kodu 1254X").build();
+		model.addAttribute("controller_key", productDto);
+		return "admin/thymeleaf16";
+	}
 	
 }
