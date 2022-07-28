@@ -160,6 +160,21 @@ public class ThymeleafController {
 		return "thymeleaf12";
 	}
 	
+	// ModelMapper => @RequestParam
+	// http://localhost:8080/template/thymeleaf13?id=44&product=Bilgisayar
+	// @GetMapping sonuna bir işlem yapmayan slash koymalayalım yoksa yeni
+	// attirbuters ister
+	@GetMapping("/template/thymeleaf13")
+	public String getThymeleaf12(Model model, @RequestParam(name = "id") Long id,
+			@RequestParam(name = "product") String product
+	
+	) {
+		ProductDto productDto = ProductDto.builder().productId(id).productName(product).productCode("ürün kodu 1254X")
+				.build();
+		model.addAttribute("controller_key", productDto);
+		return "thymeleaf13";
+	}
+	
 	/////////// otherfile///////////////////////////////////////////////////////////////
 	
 }
