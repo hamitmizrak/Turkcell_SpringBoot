@@ -61,21 +61,6 @@ public class CustomerDto {
 		this.customerAge = 25;
 	}
 	
-	// parametreli constructor (id'siz)
-	public CustomerDto(String customerName, String customerSurname, String emailAddress) {
-		this.customerName = customerName;
-		this.customerSurname = customerSurname;
-		this.emailAddress = emailAddress;
-	}
-	
-	// parametreli constructor (id'li)
-	public CustomerDto(Long customerId, String customerName, String customerSurname, String emailAddress) {
-		this.customerId = customerId;
-		this.customerName = customerName;
-		this.customerSurname = customerSurname;
-		this.emailAddress = emailAddress;
-	}
-	
 	// now Date
 	private static String nowDate() {
 		Locale locale = new Locale("tr", "TR");
@@ -85,5 +70,4 @@ public class CustomerDto {
 		System.out.println(changeString);
 		return changeString;
 	}
-	
 }
