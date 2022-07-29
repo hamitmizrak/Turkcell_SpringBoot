@@ -58,10 +58,10 @@
 			<div th:text="#{customerEmailAddress}" class="col-md-2 col-sm-2"></div>
 			<div class="col-md col-sm">
 				<div class="form-group">
-					<input type="text" th:field="*{emailAddress}" class="form-control mb-4"
-						name="emailAddress" id="emailAddress" placeholder="Müşteri email adresini giriniz"
+					<input type="text" th:field="*{customerEmailAddress}" class="form-control mb-4"
+						name="customerEmailAddress" id="customerEmailAddress" placeholder="Müşteri email adresini giriniz"
 						autocomplete="name" />
-					<div th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}" class="text-danger">
+					<div th:if="${#fields.hasErrors('customerEmailAddress')}" th:errors="*{customerEmailAddress}" class="text-danger">
 					</div>
 				</div>
 			</div>
@@ -81,10 +81,10 @@
 			<div th:text="#{customerTelephoneNumber}" class="col-md-2 col-sm-2"></div>
 			<div class="col-md col-sm">
 				<div class="form-group">
-					<input type="text" th:field="*{telephoneNumber}" class="form-control mb-4"
-						name="telephoneNumber" id="telephoneNumber" placeholder="Müşteri Telefon numarasını giriniz"
+					<input type="text" th:field="*{customerTelephoneNumber}" class="form-control mb-4"
+						name="customerTelephoneNumber" id="customerTelephoneNumber" placeholder="Müşteri Telefon numarasını giriniz"
 						autocomplete="name" />
-					<div th:if="${#fields.hasErrors('telephoneNumber')}" th:errors="*{telephoneNumber}"
+					<div th:if="${#fields.hasErrors('customerTelephoneNumber')}" th:errors="*{customerTelephoneNumber}"
 						class="text-danger"></div>
 				</div>
 			</div>
