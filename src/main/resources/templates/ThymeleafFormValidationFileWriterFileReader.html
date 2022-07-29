@@ -1,0 +1,119 @@
+<!doctype html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Thymeleaf Form</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="keywords" content="html5,css3,js,jquery,bootstrap,react,javase" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" th:href="@{/css/template.css}">
+	<script th:src="@{/js/template.js}"></script>
+</head>
+
+<body class="container bg-dark text-warning">
+	<!-- start codes -->
+
+	<div class="container row">
+		<p class="display-4 mt-4 text-warning">Form Validation</p>
+		<form th:action="@{/validation/form}" th:object="${key_validation_form}" th:method="post">
+
+			<!-- customerName -->
+			<div th:text="#{customerName}" class="col-md-2 col-sm-2"></div>
+			<div class="col-md col-sm">
+				<div class="form-group">
+					<input type="text" th:field="*{customerName}" class="form-control mb-4" 
+						name="customerName" id="customerName" placeholder="müşteri adını giriniz" autocomplete="name"
+						autofocus="autofocus" />
+					<div th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" class="text-danger">
+					</div>
+				</div>
+			</div>
+
+			<!-- customerSurname -->
+			<div th:text="#{customerSurname}" class="col-md-2 col-sm-2"></div>
+			<div class="col-md col-sm">
+				<div class="form-group">
+					<input type="text" th:field="*{customerSurname}" class="form-control mb-4" 
+						name="customerSurname" id="customerSurname" placeholder="Müşteri Soyadını giriniz"
+						autocomplete="name" />
+					<div th:if="${#fields.hasErrors('customerSurname')}" th:errors="*{customerSurname}"
+						class="text-danger"></div>
+				</div>
+			</div>
+
+			<!-- customerPassword -->
+			<div th:text="#{customerPassword}" class="col-md-2 col-sm-2"></div>
+			<div class="col-md col-sm">
+				<div class="form-group">
+					<input type="text" th:field="*{customerPassword}" class="form-control mb-4"
+						name="customerPassword" id="customerPassword" placeholder="Müşteri Şifresini giriniz"
+						autocomplete="name" />
+					<div th:if="${#fields.hasErrors('customerPassword')}" th:errors="*{customerPassword}"
+						class="text-danger"></div>
+				</div>
+			</div>
+
+			<!-- emailAddress -->
+			<div th:text="#{customerEmailAddress}" class="col-md-2 col-sm-2"></div>
+			<div class="col-md col-sm">
+				<div class="form-group">
+					<input type="text" th:field="*{emailAddress}" class="form-control mb-4"
+						name="emailAddress" id="emailAddress" placeholder="Müşteri email adresini giriniz"
+						autocomplete="name" />
+					<div th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}" class="text-danger">
+					</div>
+				</div>
+			</div>
+
+			<!-- customerAge -->
+			<div th:text="#{customerAge}" class="col-md-2 col-sm-2"></div>
+			<div class="col-md col-sm">
+				<div class="form-group">
+					<input type="text" th:field="*{customerAge}" class="form-control mb-4"
+						name="customerAge" id="customerAge" placeholder="Müşteri yaşını giriniz" autocomplete="name" />
+					<div th:if="${#fields.hasErrors('customerAge')}" th:errors="*{customerAge}" class="text-danger">
+					</div>
+				</div>
+			</div>
+
+			<!-- telephoneNumber -->
+			<div th:text="#{customerTelephoneNumber}" class="col-md-2 col-sm-2"></div>
+			<div class="col-md col-sm">
+				<div class="form-group">
+					<input type="text" th:field="*{telephoneNumber}" class="form-control mb-4"
+						name="telephoneNumber" id="telephoneNumber" placeholder="Müşteri Telefon numarasını giriniz"
+						autocomplete="name" />
+					<div th:if="${#fields.hasErrors('telephoneNumber')}" th:errors="*{telephoneNumber}"
+						class="text-danger"></div>
+				</div>
+			</div>
+
+			<!-- customerMessage -->
+			<div th:text="#{customerMessage}" class="col-md-2 col-sm-2"></div>
+			<div class="col-md col-sm">
+				<div class="form-group">
+					<textarea cols="20" th:field="*{customerMessage}" class="form-control mb-4" 
+						name="customerMessage" id="customerMessage" placeholder="Müşteri Mesajı giriniz"></textarea>
+					<div th:if="${#fields.hasErrors('customerMessage')}" th:errors="*{customerMessage}"
+						class="text-danger"></div>
+				</div>
+			</div>
+
+
+			<div class="col-md-2 col-sm-2"></div>
+			<div class="col-md col-sm">
+				<div class="text-center mt-5 mb-5">
+					<input type="reset" class="btn btn-danger" value="TEMİZLE" />
+					<input type="submit" class="btn btn-primary" value="GÖNDER" />
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- ends codes -->
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

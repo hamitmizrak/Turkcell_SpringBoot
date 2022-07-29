@@ -1,0 +1,23 @@
+<!doctype html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Thymeleaf Form</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="keywords" content="html5,css3,js,jquery,bootstrap,react,javase" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" th:href="@{/css/template.css}">
+	<script th:src="@{/js/template.js}"></script>
+</head>
+
+<body class="container bg-dark text-warning">
+	<!-- start codes -->
+
+<h1 th:text="${key_success}" class="text-center text-primary"></h1>
+	<!-- ends codes -->
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -6,9 +6,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
 
+import javax.validation.Valid;
+
 import com.hamitmizrak.dto.CustomerDto;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -27,7 +34,31 @@ public class ThmeleafFormValidationFileWriterFileReader {
 	}
 	
 	// FORM VALIDATION
+	// http://localhost:8080/validation/form
+	@GetMapping("/validation/form")
+	public String validationGetForm(Model model) {
+		model.addAttribute("key_validation_form", new CustomerDto());
+		return "ThymeleafFormValidationFileWriterFileReader";
+	}
 	
+	// http://localhost:8080/validation/form
+	@PostMapping("/validation/form")
+	public String validationPostForm(@Valid @ModelAttribute("key_validation_form") CustomerDto customerDto,
+			BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			log.error("hata var: " + bindingResult);
+			return "ThymeleafFormValidationFileWriterFileReader";
+		} else {
+			model.addAttribute("key_success", CustomerDto.class + " Eklemesi başarılı");
+			log.info(customerDto);
+			writeDataFile(customerDto);
+		}
+		// model.addAttribute("key_validation_form", customerDto);
+		// hata yoksa success sayfasına gitsin
+		return "ThymeleafFormValidationSuccess";
+	}
+	
+	/////////////////////////////////////////////////////
 	// write method
 	private static void writeDataFile(CustomerDto dto) {
 		log.info("Dosyanız" + MY_PATH);
