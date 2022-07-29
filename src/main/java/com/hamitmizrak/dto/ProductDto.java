@@ -26,5 +26,4 @@ public class ProductDto {
 		this.productName = productName;
 		this.productCode = productCode;
 	}
-	
 }

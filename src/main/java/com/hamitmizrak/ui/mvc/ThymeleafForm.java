@@ -48,7 +48,6 @@ public class ThymeleafForm {
 	
 	/////// write method
 	private static void writeDataFile(ProductDto dto) {
-		
 		System.out.println(MY_PATH);
 		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(MY_PATH, true))) {
 			bufferedWriter.write(dto.getProductId() + " " + dto.getProductName() + " " + dto.getProductCode());
@@ -56,6 +55,7 @@ public class ThymeleafForm {
 			log.info("Dosyanız" + MY_PATH + " yazıldı");
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.error("Yazmada sorun oluştu");
 		}
 	}
 	
@@ -68,10 +68,10 @@ public class ThymeleafForm {
 			while ((satir = bufferedReader.readLine()) != null) {
 				builder.append(satir);
 			}
-			System.out.println(builder);
 			log.info(builder);
 		} catch (Exception e) {
-			System.out.println("Okumada sorun oluştu");
+			System.out.println();
+			log.error("Okumada sorun oluştu");
 			e.printStackTrace();
 		}
 	}
