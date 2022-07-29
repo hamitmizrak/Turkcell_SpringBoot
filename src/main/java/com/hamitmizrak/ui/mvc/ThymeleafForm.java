@@ -1,5 +1,11 @@
 package com.hamitmizrak.ui.mvc;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Scanner;
+
 import com.hamitmizrak.dto.ProductDto;
 
 import org.springframework.stereotype.Controller;
@@ -12,6 +18,12 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 @Log4j2
 public class ThymeleafForm {
+	private static Scanner klavye;
+	private static final String MY_PATH = "C:\\turkcell\\spring_form.txt";
+	
+	public ThymeleafForm() {
+		klavye = new Scanner(System.in);
+	}
 	
 	// http://localhost:8080/product/form
 	// default html sayfasınının ilk açıldığı zaman görünecek
@@ -28,7 +40,40 @@ public class ThymeleafForm {
 		log.info(productDto);
 		// save
 		// file upload
+		writeDataFile(productDto);
+		// file reader
+		ReadDataFile();
 		return "form";
+	}
+	
+	/////// write method
+	private static void writeDataFile(ProductDto dto) {
+		
+		System.out.println(MY_PATH);
+		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(MY_PATH, true))) {
+			bufferedWriter.write(dto.getProductId() + " " + dto.getProductName() + " " + dto.getProductCode());
+			bufferedWriter.flush();
+			log.info("Dosyanız" + MY_PATH + " yazıldı");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//////// read method
+	private static void ReadDataFile() {
+		System.out.println("*** Dosya Oku ***");
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(MY_PATH))) {
+			StringBuilder builder = new StringBuilder();
+			String satir = "";
+			while ((satir = bufferedReader.readLine()) != null) {
+				builder.append(satir);
+			}
+			System.out.println(builder);
+			log.info(builder);
+		} catch (Exception e) {
+			System.out.println("Okumada sorun oluştu");
+			e.printStackTrace();
+		}
 	}
 	
 }
