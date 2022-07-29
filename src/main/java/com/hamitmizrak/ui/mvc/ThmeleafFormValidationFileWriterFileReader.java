@@ -47,6 +47,7 @@ public class ThmeleafFormValidationFileWriterFileReader {
 			BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			log.error("hata var: " + bindingResult);
+			
 			return "ThymeleafFormValidationFileWriterFileReader";
 		} else {
 			model.addAttribute("key_success", CustomerDto.class + " Eklemesi başarılı");
@@ -63,8 +64,7 @@ public class ThmeleafFormValidationFileWriterFileReader {
 	private static void writeDataFile(CustomerDto dto) {
 		log.info("Dosyanız" + MY_PATH);
 		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(MY_PATH, true))) {
-			bufferedWriter.write(dto.getCustomerId() + " " + dto.getCustomerName() + " " + dto.getCustomerSurname()
-					+ " " + dto.getEmailAddress());
+			bufferedWriter.write(" " + dto);
 			bufferedWriter.flush();
 			log.info("Dosyanız" + MY_PATH + " yazıldı");
 		} catch (Exception e) {

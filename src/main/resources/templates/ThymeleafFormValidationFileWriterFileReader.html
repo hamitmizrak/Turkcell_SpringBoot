@@ -17,16 +17,25 @@
 	<div class="container row">
 		<p class="display-4 mt-4 text-warning">Form Validation</p>
 		<form th:action="@{/validation/form}" th:object="${key_validation_form}" th:method="post">
+		
+		<!-- customerID -->
+		<div class="col-md col-sm">
+			<div class="form-group">
+				<input type="hidden" th:field="*{customerId}" class="form-control mb-4" name="customerId" id="customerId" />
+				<div th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}" class="text-danger">
+				</div>
+			</div>
+		</div>
 
 			<!-- customerName -->
 			<div th:text="#{customerName}" class="col-md-2 col-sm-2"></div>
 			<div class="col-md col-sm">
 				<div class="form-group">
 					<input type="text" th:field="*{customerName}" class="form-control mb-4" 
-						name="customerName" id="customerName" placeholder="müşteri adını giriniz" autocomplete="name"
-						autofocus="autofocus" />
-					<div th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" class="text-danger">
-					</div>
+						name="customerName" id="customerName" placeholder="Müşteri Adını giriniz"
+						autocomplete="name" />
+					<span th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}"
+						class="text-danger"></span>
 				</div>
 			</div>
 
@@ -93,7 +102,7 @@
 			<div th:text="#{customerMessage}" class="col-md-2 col-sm-2"></div>
 			<div class="col-md col-sm">
 				<div class="form-group">
-					<textarea cols="20" th:field="*{customerMessage}" class="form-control mb-4" 
+					<textarea rows="5" th:field="*{customerMessage}" class="form-control mb-4"
 						name="customerMessage" id="customerMessage" placeholder="Müşteri Mesajı giriniz"></textarea>
 					<div th:if="${#fields.hasErrors('customerMessage')}" th:errors="*{customerMessage}"
 						class="text-danger"></div>
@@ -104,7 +113,7 @@
 			<div class="col-md-2 col-sm-2"></div>
 			<div class="col-md col-sm">
 				<div class="text-center mt-5 mb-5">
-					<input type="reset" class="btn btn-danger" value="TEMİZLE" />
+					<a th:href="@{/validation/form}" class="btn btn-danger">TEMİZLE</a>
 					<input type="submit" class="btn btn-primary" value="GÖNDER" />
 				</div>
 			</div>

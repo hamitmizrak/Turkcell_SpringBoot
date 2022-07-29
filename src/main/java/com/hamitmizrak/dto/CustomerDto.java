@@ -34,7 +34,6 @@ public class CustomerDto {
 	@Email(message = "uygun formatta girmediniz exam: deneme@xyz.com")
 	private String customerEmailAddress;
 	
-	@NotEmpty(message = "müşteri yaşı boş geçilemez")
 	@Min(value = 18, message = "18 yaşından küçük müşteriyi kabul edilmiyor")
 	@Max(value = 55, message = "55 yaşından büyük müşteriyi kabul edilmiyor")
 	private int customerAge;
@@ -58,7 +57,6 @@ public class CustomerDto {
 	public CustomerDto() {
 		customerId = 0L;
 		customerName = "Müşterini adını yazmadınız";
-		this.customerAge = 25;
 	}
 	
 	// now Date
