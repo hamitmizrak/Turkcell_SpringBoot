@@ -79,7 +79,7 @@ public class ThymeleafController {
 		List<ProductDto> listem = new ArrayList<>();
 		for (int i = 1; i <= 10; i++) {
 			UUID uuid = UUID.randomUUID();
-			listem.add(ProductDto.builder().productId(Long.valueOf(i)).productName("ürün adı: " + i)
+			listem.add(ProductDto.builder().productId(Long.valueOf(i)).productName("ürün adı44: " + i)
 					.productCode(uuid.toString()).build());
 		}
 		;
