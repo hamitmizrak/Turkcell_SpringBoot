@@ -3,13 +3,12 @@ package com.hamitmizrak.ui.mvc;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.swing.JOptionPane;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hamitmizrak.data.entity.ProductEntity;
@@ -24,11 +23,11 @@ public class ProductMvcEntityController {
 	@Autowired
 	IProductRepository repository;
 	
-	// http://localhost:8080/create/product
-	// CREATE
-	@GetMapping("/create/product")
+	// CREATE ALL
+	// http://localhost:8080/create/all/product
+	@GetMapping("/create/all/product")
 	@ResponseBody
-	public String createProduct(Model model) {
+	public String createAllProduct(Model model) {
 		ProductEntity entity = null;
 		int counter = 1;
 		for (int i = 1; i < 10; i++) {
@@ -39,6 +38,18 @@ public class ProductMvcEntityController {
 		}
 		model.addAttribute("entity_key", entity);
 		return counter + " tane Product Eklendi";
+	}
+	
+	// CREATE
+	// http://localhost:8080/create/product?product_name=ürünadi&product_code=ürünkodu
+	@GetMapping("/create/product")
+	public String createProduct(@RequestParam(name = "product_name") String productName,
+			@RequestParam(name = "product_code") String productCode, Model model) {
+		ProductEntity entity = new ProductEntity(productName, productCode);
+		model.addAttribute("entity_key", entity);
+		log.info(entity);
+		repository.save(entity);
+		return "entity_mvc";
 	}
 	
 	// NOT: findById,deleteById,update ==> bize ID lazım
@@ -53,8 +64,11 @@ public class ProductMvcEntityController {
 			model.addAttribute("entity_key", findEntity.get());
 			log.info(findEntity.get());
 			return "entity_mvc";
+		} else {
+			model.addAttribute("entity_not_key", id + " numaralı ID Yoktur.");
 		}
-		return "failed";
+		// return "failed";
+		return "entity_mvc";
 	}
 	
 	// SELECT
@@ -75,33 +89,32 @@ public class ProductMvcEntityController {
 		if (findByIdEntity.isPresent()) {
 			repository.deleteById(id);
 			log.info(findByIdEntity.get());
-			model.addAttribute("entity_key", findByIdEntity.get());
+			// model.addAttribute("entity_key", findByIdEntity.get());
+			model.addAttribute("entity_not_key", "ID: " + findByIdEntity.get().getId() + " Silindi.");
 		} else {
-			model.addAttribute("entity_key", id + " numaralı ID Yoktur.");
-			return "failed";
+			model.addAttribute("entity_not_key", id + " numaralı ID Yoktur.");
 		}
 		return "entity_mvc";
 	}
 	
 	// UPDATE
-	// http://localhost:8080/update/product/3
-	@GetMapping("update/product/{id}")
-	public String updateProductById(@PathVariable(name = "id") Long id, Model model) {
-		String productName, productCode;
-		Optional<ProductEntity> findByIdEntity = repository.findById(id);
+	// http://localhost:8080/update/product?product_id=7&product_name=ürünadi44&product_code=ürünkodu44
+	@GetMapping("update/product")
+	public String updateProductById(@RequestParam(name = "product_id") Long productId,
+			@RequestParam(name = "product_name") String productName,
+			@RequestParam(name = "product_code") String productCode, Model model) {
+		
+		Optional<ProductEntity> findByIdEntity = repository.findById(productId);
 		if (findByIdEntity.isPresent()) {
 			// ürünü getirmek
 			ProductEntity entity = findByIdEntity.get();
-			productName = JOptionPane.showInputDialog("Ürün adını giriniz");
-			productCode = JOptionPane.showInputDialog("Ürün Kodu girini");
 			
 			entity.setProductName(productName);
 			entity.setProductCode(productCode);
 			repository.save(entity);
 			model.addAttribute("entity_key", entity);
 		} else {
-			model.addAttribute("entity_key", id + " numaralı ID Yoktur.");
-			return "failed";
+			model.addAttribute("entity_not_key", productId + " numaralı ID Yoktur.");
 		}
 		return "entity_mvc";
 	}

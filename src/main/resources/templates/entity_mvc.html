@@ -66,7 +66,9 @@
         </div>
     </div>
 
+<p th:text="${entity_not_key}"></p>
     
+ 
     <table class="table hover table-strpied table">
         <thead>
             <tr>
@@ -80,8 +82,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:if="${pro.ProductId>0}" th:each="pro:${entity_key}">
-                <td th:text="${pro.ProductId}"></td>
+            <tr th:if="${pro.id>0}" th:each="pro:${entity_key}">
+                <td th:text="${pro.id}"></td>
                 <td th:text="${pro.productName}"></td>
                 <td th:text="${pro.productCode}"></td>
                 <td> <a href="#" class="btn btn-warning"><i class="fa-solid fa-wrench"></i> <span th:text="#{update}"></span></a> </td>
@@ -91,7 +93,7 @@
             </tr>
         </tbody>
     </table>
-    
+
    
  <!-- ends codes -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
