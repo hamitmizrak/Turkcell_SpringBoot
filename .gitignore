@@ -1,6 +1,6 @@
 # special data
 # log
-# memory_persist
+memory_persist
 frontend/node_modules
 
 
