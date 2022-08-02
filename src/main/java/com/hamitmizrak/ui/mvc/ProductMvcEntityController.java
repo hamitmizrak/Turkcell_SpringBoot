@@ -52,8 +52,17 @@ public class ProductMvcEntityController {
 		return "entity_mvc";
 	}
 	
-	// NOT: findById,deleteById,update ==> bize ID lazım
+	// LIST
+	// http://localhost:8080/select/product
+	@GetMapping("select/product")
+	public String selectProduct(Model model) {
+		Iterable<ProductEntity> listem = repository.findAll();
+		model.addAttribute("entity_key", listem);
+		listem.forEach(System.out::println);
+		return "entity_mvc";
+	}
 	
+	// NOT: findById,deleteById,update ==> bize ID lazım
 	// FIND
 	// http://localhost:8080/find/product/1
 	@GetMapping("find/product/{id}")
@@ -71,13 +80,24 @@ public class ProductMvcEntityController {
 		return "entity_mvc";
 	}
 	
-	// SELECT
-	// http://localhost:8080/select/product
-	@GetMapping("select/product")
-	public String selectProduct(Model model) {
-		Iterable<ProductEntity> listem = repository.findAll();
-		model.addAttribute("entity_key", listem);
-		listem.forEach(System.out::println);
+	// UPDATE
+	// http://localhost:8080/update/product?product_id=9&product_name=ürünadi44&product_code=ürünkodu44
+	@GetMapping("update/product")
+	public String updateProductById(@RequestParam(name = "product_id") Long productId,
+			@RequestParam(name = "product_name") String productName,
+			@RequestParam(name = "product_code") String productCode, Model model) {
+		
+		Optional<ProductEntity> findByIdEntity = repository.findById(productId);
+		if (findByIdEntity.isPresent()) {
+			// ürünü getirmek
+			ProductEntity entity = findByIdEntity.get();
+			entity.setProductName(productName);
+			entity.setProductCode(productCode);
+			repository.save(entity);
+			model.addAttribute("entity_key", entity);
+		} else {
+			model.addAttribute("entity_not_key", productId + " numaralı ID Yoktur.");
+		}
 		return "entity_mvc";
 	}
 	
@@ -93,28 +113,6 @@ public class ProductMvcEntityController {
 			model.addAttribute("entity_not_key", "ID: " + findByIdEntity.get().getId() + " Silindi.");
 		} else {
 			model.addAttribute("entity_not_key", id + " numaralı ID Yoktur.");
-		}
-		return "entity_mvc";
-	}
-	
-	// UPDATE
-	// http://localhost:8080/update/product?product_id=7&product_name=ürünadi44&product_code=ürünkodu44
-	@GetMapping("update/product")
-	public String updateProductById(@RequestParam(name = "product_id") Long productId,
-			@RequestParam(name = "product_name") String productName,
-			@RequestParam(name = "product_code") String productCode, Model model) {
-		
-		Optional<ProductEntity> findByIdEntity = repository.findById(productId);
-		if (findByIdEntity.isPresent()) {
-			// ürünü getirmek
-			ProductEntity entity = findByIdEntity.get();
-			
-			entity.setProductName(productName);
-			entity.setProductCode(productCode);
-			repository.save(entity);
-			model.addAttribute("entity_key", entity);
-		} else {
-			model.addAttribute("entity_not_key", productId + " numaralı ID Yoktur.");
 		}
 		return "entity_mvc";
 	}
