@@ -33,7 +33,7 @@ public class ProductMvcEntityController {
 		int counter = 1;
 		for (int i = 1; i < 10; i++) {
 			UUID uuid = UUID.randomUUID();
-			entity = new ProductEntity("hamit " + i, uuid.toString());
+			entity = new ProductEntity("hamit " + i, uuid.toString(), i * 100);
 			repository.save(entity);
 			counter++;
 		}
@@ -42,11 +42,12 @@ public class ProductMvcEntityController {
 	}
 	
 	// CREATE
-	// http://localhost:8080/create/product?product_name=ürünadi&product_code=ürünkodu
+	// http://localhost:8080/create/product?product_name=ürünadi&product_code=ürünkodu&product_price=100
 	@GetMapping("/create/product")
 	public String createProduct(@RequestParam(name = "product_name") String productName,
-			@RequestParam(name = "product_code") String productCode, Model model) {
-		ProductEntity entity = new ProductEntity(productName, productCode);
+			@RequestParam(name = "product_code") String productCode,
+			@RequestParam(name = "product_price") double productPrice, Model model) {
+		ProductEntity entity = new ProductEntity(productName, productCode, productPrice);
 		model.addAttribute("entity_key", entity);
 		log.info(entity);
 		repository.save(entity);
@@ -61,18 +62,6 @@ public class ProductMvcEntityController {
 		model.addAttribute("entity_key", listem);
 		listem.forEach(System.out::println);
 		return "entity_mvc";
-	}
-	
-	// Bizim yazdığımız sorgu
-	// http://localhost:8080/find/productdata/hamit 9
-	// http://localhost:8080/find/productdata/hamit%209
-	@GetMapping("find/productdata/{product_name}")
-	// @ResponseBody
-	public String findProductName(@PathVariable(name = "product_name") String productName, Model model) {
-		List<ProductEntity> listem = repository.findProductEntitiesByProductName(productName);
-		log.info(listem);
-		model.addAttribute("product_name_key", listem);
-		return "product_name";
 	}
 	
 	// NOT: findById,deleteById,update ==> bize ID lazım
@@ -94,11 +83,12 @@ public class ProductMvcEntityController {
 	}
 	
 	// UPDATE
-	// http://localhost:8080/update/product?product_id=9&product_name=ürünadi44&product_code=ürünkodu44
+	// http://localhost:8080/update/product?product_id=9&product_name=ürünadi44&product_code=ürünkodu44&product_price=100
 	@GetMapping("update/product")
 	public String updateProductById(@RequestParam(name = "product_id") Long productId,
 			@RequestParam(name = "product_name") String productName,
-			@RequestParam(name = "product_code") String productCode, Model model) {
+			@RequestParam(name = "product_code") String productCode,
+			@RequestParam(name = "product_price") double productPrice, Model model) {
 		
 		Optional<ProductEntity> findByIdEntity = repository.findById(productId);
 		if (findByIdEntity.isPresent()) {
@@ -106,6 +96,7 @@ public class ProductMvcEntityController {
 			ProductEntity entity = findByIdEntity.get();
 			entity.setProductName(productName);
 			entity.setProductCode(productCode);
+			entity.setProductPrice(productPrice);
 			repository.save(entity);
 			model.addAttribute("entity_key", entity);
 		} else {
@@ -127,6 +118,67 @@ public class ProductMvcEntityController {
 		} else {
 			model.addAttribute("entity_not_key", id + " numaralı ID Yoktur.");
 		}
+		return "entity_mvc";
+	}
+	
+	/////// #### Delived Query ####
+	// Bizim yazdığımız sorgu
+	// http://localhost:8080/find/productdata/hamit%209
+	@GetMapping("find/productdata/{product_name}")
+	// @ResponseBody
+	public String findProductName(@PathVariable(name = "product_name") String productName, Model model) {
+		// http://localhost:8080/find/productdata/hamit 9
+		// List<ProductEntity> listem =
+		// repository.findProductEntitiesByProductName(productName);
+		// List<ProductEntity> listem = repository.findByProductName(productName);
+		
+		// starts
+		// http://localhost:8080/find/productdata/h
+		// List<ProductEntity> listem =
+		// repository.findByProductNameStartingWith(productName);
+		// List<ProductEntity> listem =
+		// repository.findByProductNameStartsWith(productName);
+		
+		// ends
+		// http://localhost:8080/find/productdata/1
+		// List<ProductEntity> listem =
+		// repository.findByProductNameEndsWith(productName);
+		
+		// equals
+		// http://localhost:8080/find/productdata/hamit
+		// List<ProductEntity> listem = repository.findByProductNameEquals(productName);
+		
+		// like
+		// http://localhost:8080/find/productdata/hamit
+		// başlayan
+		// List<ProductEntity> listem = repository.findByProductNameLike( productName +
+		// "%");
+		// içinde geçen
+		// List<ProductEntity> listem = repository.findByProductNameLike("%" +
+		// productName + "%");
+		// biten
+		List<ProductEntity> listem = repository.findByProductNameLike("%" + productName);
+		
+		model.addAttribute("entity_key", listem);
+		return "entity_mvc";
+	}
+	
+	// http://localhost:8080/find/productprice
+	@GetMapping("find/productprice")
+	// @ResponseBody
+	public String findProductPrice(Model model) {
+		
+		// productPrice:200 olanları bana listele
+		// List<ProductEntity> listem =
+		// repository.findByProductPrice(Double.valueOf(200));
+		
+		// GreaterThan: verilen sayıadan büyük olanları
+		// List<ProductEntity> listem = repository.findByProductPriceGreaterThan(300);
+		
+		// Beetween
+		List<ProductEntity> listem = repository.findByProductPriceBetween(200, 500);
+		
+		model.addAttribute("entity_key", listem);
 		return "entity_mvc";
 	}
 	

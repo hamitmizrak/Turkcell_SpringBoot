@@ -32,6 +32,34 @@ public interface IProductRepository extends CrudRepository<ProductEntity, Long> 
 	// 4.ADIM ==> Entity variable yazıyoruz
 	// List<ProductEntity> findProductEntitiesByProductName
 	
-	// 5.ADIM ==> parametresini yazmak
+	// 5.ADIM ==> parametresini yazmak ==> productName
 	List<ProductEntity> findProductEntitiesByProductName(String productName);
+	
+	List<ProductEntity> findByProductName(String productName);
+	
+	List<ProductEntity> findByProductCode(String productCode);
+	
+	// startingWith: ile başlayan
+	List<ProductEntity> findByProductNameStartingWith(String productName);
+	
+	List<ProductEntity> findByProductNameStartsWith(String productName);
+	
+	// endsWith: ile biten
+	List<ProductEntity> findByProductNameEndsWith(String productName);
+	
+	// equals
+	List<ProductEntity> findByProductNameEquals(String productName);
+	
+	// like
+	List<ProductEntity> findByProductNameLike(String productName);
+	
+	// price
+	List<ProductEntity> findByProductPrice(double productPrice);
+	
+	// GreaterThan: verilen sayıadan büyük olanları
+	List<ProductEntity> findByProductPriceGreaterThan(double productPrice);
+	
+	// between
+	List<ProductEntity> findByProductPriceBetween(double productPriceMin, double productPriceMax);
+	
 }

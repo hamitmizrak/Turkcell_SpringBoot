@@ -74,6 +74,7 @@
                 <th th:text="#{product_id}" class="uppercase"></th>
                  <th th:text="#{product_name}" class="uppercase"></th>
                  <th th:text="#{product_code}" class="uppercase"></th>
+                  <th th:text="#{product_price}" class="uppercase"></th>
                 <th th:text="#{update}" class="uppercase"></th>
                 <th th:text="#{show}" class="uppercase"></th>
                 <th th:text="#{delete}" class="uppercase"></th>
@@ -81,10 +82,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:if="${pro.id>0}" th:each="pro:${product_name_key}">
+            <tr th:if="${pro.id>0}" th:each="pro:${entity_key}">
                 <td th:text="${pro.id}"></td>
                 <td th:text="${pro.productName}"></td>
                 <td th:text="${pro.productCode}"></td>
+                 <td th:text="${pro.productPrice}"></td>
                 <td> <a href="#" class="btn btn-warning"><i class="fa-solid fa-wrench"></i> <span th:text="#{update}"></span></a> </td>
                 <td> <a href="#" class="btn btn-primary"><i class="fa-solid fa-eye"></i> <span th:text="#{show}"></span> </a> </td>
                 <td> <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> <span th:text="#{delete}"></span></a>
@@ -92,7 +94,6 @@
             </tr>
         </tbody>
     </table>
-
    
  <!-- ends codes -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

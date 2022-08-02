@@ -52,15 +52,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Ürün Kaydet</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     Body
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary">Kaydet</button>
                 </div>
             </div>
         </div>
@@ -74,6 +74,7 @@
                 <th th:text="#{product_id}" class="uppercase"></th>
                  <th th:text="#{product_name}" class="uppercase"></th>
                  <th th:text="#{product_code}" class="uppercase"></th>
+                  <th th:text="#{product_price}" class="uppercase"></th>
                 <th th:text="#{update}" class="uppercase"></th>
                 <th th:text="#{show}" class="uppercase"></th>
                 <th th:text="#{delete}" class="uppercase"></th>
@@ -85,6 +86,7 @@
                 <td th:text="${pro.id}"></td>
                 <td th:text="${pro.productName}"></td>
                 <td th:text="${pro.productCode}"></td>
+                 <td th:text="${pro.productPrice}"></td>
                 <td> <a href="#" class="btn btn-warning"><i class="fa-solid fa-wrench"></i> <span th:text="#{update}"></span></a> </td>
                 <td> <a href="#" class="btn btn-primary"><i class="fa-solid fa-eye"></i> <span th:text="#{show}"></span> </a> </td>
                 <td> <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> <span th:text="#{delete}"></span></a>
