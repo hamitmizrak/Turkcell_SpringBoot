@@ -81,7 +81,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:if="${pro.id>0}" th:each="pro:${entity_key}">
+            <tr th:if="${pro.id>0}" th:each="pro:${product_name_key}">
                 <td th:text="${pro.id}"></td>
                 <td th:text="${pro.productName}"></td>
                 <td th:text="${pro.productCode}"></td>

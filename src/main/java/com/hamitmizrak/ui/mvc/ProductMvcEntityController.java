@@ -1,5 +1,6 @@
 package com.hamitmizrak.ui.mvc;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,7 +33,7 @@ public class ProductMvcEntityController {
 		int counter = 1;
 		for (int i = 1; i < 10; i++) {
 			UUID uuid = UUID.randomUUID();
-			entity = new ProductEntity("ürün adı: " + i, uuid.toString());
+			entity = new ProductEntity("hamit " + i, uuid.toString());
 			repository.save(entity);
 			counter++;
 		}
@@ -60,6 +61,18 @@ public class ProductMvcEntityController {
 		model.addAttribute("entity_key", listem);
 		listem.forEach(System.out::println);
 		return "entity_mvc";
+	}
+	
+	// Bizim yazdığımız sorgu
+	// http://localhost:8080/find/productdata/hamit 9
+	// http://localhost:8080/find/productdata/hamit%209
+	@GetMapping("find/productdata/{product_name}")
+	// @ResponseBody
+	public String findProductName(@PathVariable(name = "product_name") String productName, Model model) {
+		List<ProductEntity> listem = repository.findProductEntitiesByProductName(productName);
+		log.info(listem);
+		model.addAttribute("product_name_key", listem);
+		return "product_name";
 	}
 	
 	// NOT: findById,deleteById,update ==> bize ID lazım
