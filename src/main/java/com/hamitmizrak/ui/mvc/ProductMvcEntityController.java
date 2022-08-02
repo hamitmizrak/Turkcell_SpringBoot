@@ -131,6 +131,7 @@ public class ProductMvcEntityController {
 		// List<ProductEntity> listem =
 		// repository.findProductEntitiesByProductName(productName);
 		// List<ProductEntity> listem = repository.findByProductName(productName);
+		// model.addAttribute("entity_key", listem);
 		
 		// starts
 		// http://localhost:8080/find/productdata/h
@@ -138,15 +139,33 @@ public class ProductMvcEntityController {
 		// repository.findByProductNameStartingWith(productName);
 		// List<ProductEntity> listem =
 		// repository.findByProductNameStartsWith(productName);
+		// model.addAttribute("entity_key", listem);
 		
 		// ends
 		// http://localhost:8080/find/productdata/1
 		// List<ProductEntity> listem =
 		// repository.findByProductNameEndsWith(productName);
+		// model.addAttribute("entity_key", listem);
 		
 		// equals
-		// http://localhost:8080/find/productdata/hamit
+		// http://localhost:8080/find/productdata/hamit 1
+		// http://localhost:8080/find/productdata/hamit%201
 		// List<ProductEntity> listem = repository.findByProductNameEquals(productName);
+		// List<ProductEntity> listem = repository.findByProductNameIs(productName);
+		// model.addAttribute("entity_key", listem);
+		
+		// not
+		// http://localhost:8080/find/productdata/hamit 1
+		// http://localhost:8080/find/productdata/hamit%201
+		// List<ProductEntity> listem = repository.findByProductNameNot(productName);
+		// List<ProductEntity> listem = repository.findByProductNameIsNot(productName);
+		// model.addAttribute("entity_key", listem);
+		
+		// distinct: tekrar etmeyen listelemek
+		// http://localhost:8080/find/productdata/hamit 1
+		// List<ProductEntity> listem =
+		// repository.findDistinctByProductName(productName);
+		// model.addAttribute("entity_key", listem);
 		
 		// like
 		// http://localhost:8080/find/productdata/hamit
@@ -157,28 +176,72 @@ public class ProductMvcEntityController {
 		// List<ProductEntity> listem = repository.findByProductNameLike("%" +
 		// productName + "%");
 		// biten
-		List<ProductEntity> listem = repository.findByProductNameLike("%" + productName);
+		// List<ProductEntity> listem = repository.findByProductNameLike("%" +
+		// productName);
+		// model.addAttribute("entity_key", listem);
 		
-		model.addAttribute("entity_key", listem);
-		return "entity_mvc";
-	}
-	
-	// http://localhost:8080/find/productprice
-	@GetMapping("find/productprice")
-	// @ResponseBody
-	public String findProductPrice(Model model) {
-		
+		// productPrice
 		// productPrice:200 olanları bana listele
+		// http://localhost:8080/find/productdata/hamit
 		// List<ProductEntity> listem =
 		// repository.findByProductPrice(Double.valueOf(200));
+		// model.addAttribute("entity_key", listem);
 		
-		// GreaterThan: verilen sayıadan büyük olanları
+		// GreaterThan: verilen sayıdadan büyük olanları
+		// http://localhost:8080/find/productdata/hamit
 		// List<ProductEntity> listem = repository.findByProductPriceGreaterThan(300);
+		// model.addAttribute("entity_key", listem);
 		
 		// Beetween
+		// http://localhost:8080/find/productdata/hamit
 		List<ProductEntity> listem = repository.findByProductPriceBetween(200, 500);
-		
 		model.addAttribute("entity_key", listem);
+		
+		// Çoklu arama
+		// http://localhost:8080/find/productdata/hamit 1
+		// http://localhost:8080/find/productdata/hamit%201
+		// List<ProductEntity> listem =
+		// repository.findByProductNameOrProductCodeAllIgnoreCase("hamit 1",
+		// "a20953df-120a-4203-989b-1c77096122fa");
+		// model.addAttribute("entity_key", listem);
+		
+		// order by sıralama: küçükten büyüğe sıralamak
+		// http://localhost:8080/find/productdata/hamit
+		// List<ProductEntity> listem =
+		// repository.findByProductNameContainingOrderByProductName(productName);
+		// model.addAttribute("entity_key", listem);
+		
+		// order by sıralama: büyükten küçüğe sıralamak
+		// http://localhost:8080/find/productdata/hamit
+		// List<ProductEntity> listem =
+		// repository.findByProductNameContainingOrderByProductNameDesc(productName);
+		// model.addAttribute("entity_key", listem);
+		
+		// limit
+		// http://localhost:8080/find/productdata/hamit
+		// Tepe 1
+		// List<ProductEntity> listem = repository.findFirstByOrderById();
+		// List<ProductEntity> listem = repository.findTopByOrderByProductName();
+		// List<ProductEntity> listem = repository.findFirst4ByOrderById(); //
+		// model.addAttribute("entity_key", listem);
+		
+		// delete
+		// http://localhost:8080/find/productdata/hamit
+		// repository.deleteById(Long.valueOf(1)); //
+		
+		// null not
+		// http://localhost:8080/find/productdata/hamit 1
+		// http://localhost:8080/find/productdata/hamit%201
+		// List<ProductEntity> listem = repository.findByProductNameIsNull(productName);
+		// List<ProductEntity> listem = repository.findByProductNameIsNot(productName);
+		// model.addAttribute("entity_key", listem);
+		
+		// count
+		// http://localhost:8080/find/productdata/hamit 2
+		// http://localhost:8080/find/productdata/hamit%201
+		// int countName = repository.countByProductName(productName);
+		// model.addAttribute("entity_count_key", countName);
+		
 		return "entity_mvc";
 	}
 	

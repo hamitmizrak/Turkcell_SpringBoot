@@ -40,15 +40,27 @@ public interface IProductRepository extends CrudRepository<ProductEntity, Long> 
 	List<ProductEntity> findByProductCode(String productCode);
 	
 	// startingWith: ile başlayan
+	List<ProductEntity> findByProductNameStartsWith(String productName);
+	
 	List<ProductEntity> findByProductNameStartingWith(String productName);
 	
-	List<ProductEntity> findByProductNameStartsWith(String productName);
+	List<ProductEntity> findByProductNameIsStartingWith(String productName);
 	
 	// endsWith: ile biten
 	List<ProductEntity> findByProductNameEndsWith(String productName);
 	
-	// equals
+	// equals veya IS kullanabiliriz
 	List<ProductEntity> findByProductNameEquals(String productName);
+	
+	List<ProductEntity> findByProductNameIs(String productName);
+	
+	// Not veya isNot
+	List<ProductEntity> findByProductNameNot(String productName);
+	
+	List<ProductEntity> findByProductNameIsNot(String productName);
+	
+	// distinct: tekrar etmeyen
+	List<ProductEntity> findDistinctByProductName(String productName);
 	
 	// like
 	List<ProductEntity> findByProductNameLike(String productName);
@@ -61,5 +73,35 @@ public interface IProductRepository extends CrudRepository<ProductEntity, Long> 
 	
 	// between
 	List<ProductEntity> findByProductPriceBetween(double productPriceMin, double productPriceMax);
+	
+	// çoklu arama
+	List<ProductEntity> findByProductNameOrProductCodeAllIgnoreCase(String productName, String productCode);
+	
+	// order by: ASC küçükten büyüğe sıralama
+	List<ProductEntity> findByProductNameContainingOrderByProductName(String productName);
+	
+	List<ProductEntity> findByProductNameContainingOrderByProductNameAsc(String productName);
+	
+	// order by: DESC büyükten küçüğe sıralama
+	List<ProductEntity> findByProductNameContainingOrderByProductNameDesc(String productName);
+	
+	// limit en üsteki 1
+	List<ProductEntity> findFirstByOrderById();
+	
+	// limit en üsteki 1
+	List<ProductEntity> findTopByOrderByProductName();
+	
+	// limit en üsteki 4
+	List<ProductEntity> findFirst4ByOrderById();
+	
+	// delete
+	void deleteById(int id);
+	
+	// null not null: buna dikkat et hatalar çıkartabilir
+	// List<ProductEntity> findByProductNameIsNull(String productName);
+	// List<ProductEntity> findByProductNameIsNotNull(String productName);
+	
+	// count
+	public int countByProductName(String productName);
 	
 }
