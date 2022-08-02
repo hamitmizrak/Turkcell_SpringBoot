@@ -15,7 +15,7 @@ import lombok.ToString;
 @Setter
 @ToString
 
-// entity
+// Entity
 @Entity
 @Table(name = "product")
 public class ProductEntity extends BaseEntity implements Serializable {

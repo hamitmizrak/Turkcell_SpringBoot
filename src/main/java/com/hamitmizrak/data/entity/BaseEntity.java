@@ -13,11 +13,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import lombok.Getter;
 import lombok.Setter;
 
+// lombok
 @Getter
 @Setter
+
+// super class
 @MappedSuperclass
 public class BaseEntity {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id", updatable = false)
@@ -27,5 +29,4 @@ public class BaseEntity {
 	@CreationTimestamp
 	@Column(name = "created_date", updatable = false)
 	private java.util.Date createdDate;
-	
 }
