@@ -22,7 +22,7 @@ import lombok.Setter;
 public class BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "product_id", updatable = false)
+	@Column(name = "id", updatable = false)
 	private Long id;
 	
 	@Temporal(TemporalType.TIMESTAMP)

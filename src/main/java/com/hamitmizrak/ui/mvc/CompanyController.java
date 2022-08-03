@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.validation.Valid;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +34,9 @@ public class CompanyController implements ICompanyMvc {
 	// Inject
 	@Autowired
 	ICompanyRepository repository;
+	
+	@Autowired
+	ModelMapper modelMapper;
 	
 	// Random 10<=TAX<=1000
 	private int randomNumber() {
@@ -66,7 +70,7 @@ public class CompanyController implements ICompanyMvc {
 	@Override
 	public String getCreateCompany(Model model) {
 		model.addAttribute("company_key", new CompanyDto());
-		return "company_create";
+		return "create_company";
 	}
 	
 	// CREATE POST
@@ -77,9 +81,12 @@ public class CompanyController implements ICompanyMvc {
 			BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			log.error(bindingResult);
-			return "company_create";
+			return "create_company";
 		}
-		return "redirect:/company/list";
+		// ModelMapper
+		CompanyEntity entity = modelMapper.map(companyDto, CompanyEntity.class);
+		repository.save(entity);
+		return "redirect:/list/company";
 	}
 	
 	// LIST
@@ -105,7 +112,7 @@ public class CompanyController implements ICompanyMvc {
 		} else {
 			model.addAttribute("company_not_found", id + " ID data yoktur");
 		}
-		return "redirect:/company/list";
+		return "redirect:/list/company";
 	}
 	
 	// private String companyLogo;
@@ -150,7 +157,7 @@ public class CompanyController implements ICompanyMvc {
 	// } else {
 	// model.addAttribute("company_not_found", companyId + " numaralı ID Yoktur.");
 	// }
-	// return "redirect:/company/list";
+	// return "redirect:/list/company";
 	// }
 	
 	@Override
@@ -175,7 +182,7 @@ public class CompanyController implements ICompanyMvc {
 		} else {
 			model.addAttribute("company_not_found", id + " numaralı ID Yoktur.");
 		}
-		return "redirect:/company/list";
+		return "redirect:/list/company";
 	}
 	
 	/////////////////////////////////////////////////////////////////

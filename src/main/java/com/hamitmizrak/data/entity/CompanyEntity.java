@@ -1,7 +1,6 @@
 package com.hamitmizrak.data.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,7 +47,7 @@ public class CompanyEntity extends BaseEntity implements Serializable {
 	private String companyTelephoneNumber;
 	
 	@Column(name = "company_foundation_year")
-	private Date foundationYear;
+	private String foundationYear;
 	
 	@Transient
 	private String manuelData;
@@ -57,7 +56,7 @@ public class CompanyEntity extends BaseEntity implements Serializable {
 	@Column(name = "company_tax_number", nullable = false, length = 40, updatable = false, unique = false)
 	private int companyTaxNumber;
 	
-	// private Long companyId;
+	// private Long id;
 	// private String companyName;
 	// private String companyLogo;
 	// private String companyPassword;

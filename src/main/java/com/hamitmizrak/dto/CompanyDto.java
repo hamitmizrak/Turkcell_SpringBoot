@@ -1,7 +1,5 @@
 package com.hamitmizrak.dto;
 
-import java.util.Date;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -20,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CompanyDto {
 	
-	private Long companyId;
+	private Long id;
 	
 	@NotEmpty(message = "Şirket adı boş geçilemez")
 	private String companyName;
@@ -52,6 +50,7 @@ public class CompanyDto {
 	@Pattern(regexp = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$")
 	private String companyTelephoneNumber;
 	
-	private Date foundationYear;
+	@NotEmpty(message = "Şirket kuruluş yılı boş bırakılamaz")
+	private String foundationYear;
 	
 }
