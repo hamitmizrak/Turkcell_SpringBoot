@@ -9,11 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 		org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class })
 public class TurkcellSpringBootApplication {
 	
+	// PSVM
 	public static void main(String[] args) {
 		SpringApplication.run(TurkcellSpringBootApplication.class, args);
-		
-		// System.setProperty("spring.devtools.restart.enabled", "true");
+		System.setProperty("spring.devtools.restart.enabled", "true");
 		System.setProperty("java.awt.headless", "false"); // Disables headless
-	}
+	} // psvm end
+	
+	// @Bean yazma yeri
 	
 }

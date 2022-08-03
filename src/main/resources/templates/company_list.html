@@ -1,0 +1,115 @@
+<!doctype html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Thymeleaf String 1</title>
+
+    <!-- Turkce karakter -->
+    <meta charset="utf-8">
+
+    <!-- responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- seo -->
+    <meta name="keywords" content="html5,css3,js,jquery,bootstrap,react,javase" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS v5.0.2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+
+    <!-- jquery  -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- react libraries -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <link rel="stylesheet" th:href="@{/css/template.css}">
+    <script th:src="@{/js/template.js}"></script>
+
+</head>
+
+<body class="container bg-dark44 text-warning44">
+    <!-- start codes -->
+    <!-- table.table.hover.table-strpied.table>thead>tr>th{item $}*3^^tbody>tr>td{item $}*3-->
+    <p class="display-4 mt-5 mb-5">Şirket </p>
+    
+
+	
+    
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modelId">
+        ADD
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Şirket Bilgilerini Kaydet</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Body
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table hover table-strpied table">
+        <thead>
+            <tr>
+                <th th:text="#{companyId}" class="uppercase"></th>
+                 <th th:text="#{companyName}" class="uppercase"></th>
+                 <th th:text="#{companyLogo}" class="uppercase"></th>
+                  <th th:text="#{companyPassword}" class="uppercase"></th>
+                  <th th:text="#{companyEmailAddress}" class="uppercase"></th>
+                  <th th:text="#{companyTaxNumber}" class="uppercase"></th>
+                  <th th:text="#{companyMessage}" class="uppercase"></th>
+                  <th th:text="#{companyTelephoneNumber}" class="uppercase"></th>
+                  <th th:text="#{foundationYear}" class="uppercase"></th>
+                <th th:text="#{update}" class="uppercase"></th>
+                <th th:text="#{show}" class="uppercase"></th>
+                <th th:text="#{delete}" class="uppercase"></th>
+                 
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${company.id>0}" th:each="company:${company_key}">
+                <td th:text="${company.id}"></td>
+                 <td th:text="${company.companyName}"></td>
+                <td th:text="${company.companyLogo}"></td>
+                <td th:text="${company.companyPassword}"></td>
+                <td th:text="${company.companyEmailAddress}"></td>
+                <td th:text="${company.companyTaxNumber}"></td>
+                <td th:text="${company.companyMessage}"></td>
+                <td th:text="${company.companyTelephoneNumber}"></td>
+                <td th:text="${company.foundationYear}"></td>
+                <td> <a href="#" class="btn btn-warning"><i class="fa-solid fa-wrench"></i> <span th:text="#{update}"></span></a> </td>
+                <td> <a href="#" class="btn btn-primary"><i class="fa-solid fa-eye"></i> <span th:text="#{show}"></span> </a> </td>
+                <td> <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> <span th:text="#{delete}"></span></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+   
+ <!-- ends codes -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

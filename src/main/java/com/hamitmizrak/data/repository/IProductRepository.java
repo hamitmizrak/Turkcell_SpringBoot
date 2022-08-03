@@ -68,7 +68,7 @@ public interface IProductRepository extends CrudRepository<ProductEntity, Long> 
 	// price
 	List<ProductEntity> findByProductPrice(double productPrice);
 	
-	// GreaterThan: verilen sayıadan büyük olanları
+	// GreaterThan: verilen sayıdan büyük olanları
 	List<ProductEntity> findByProductPriceGreaterThan(double productPrice);
 	
 	// between
@@ -85,7 +85,7 @@ public interface IProductRepository extends CrudRepository<ProductEntity, Long> 
 	// order by: DESC büyükten küçüğe sıralama
 	List<ProductEntity> findByProductNameContainingOrderByProductNameDesc(String productName);
 	
-	// limit en üsteki 1
+	// limit en üsteki 1 : Dikkat By önce yaz
 	List<ProductEntity> findFirstByOrderById();
 	
 	// limit en üsteki 1
