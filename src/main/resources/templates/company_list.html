@@ -78,13 +78,20 @@
                 <td th:text="${company.companyMessage}"></td>
                 <td th:text="${company.companyTelephoneNumber}"></td>
                 <td th:text="${company.foundationYear}"></td>
-                <td> <a href="#" class="btn btn-warning">
+                
+                <td> <a th:href="@{/update/company/{id}(id=${company.id})}" class="btn btn-warning">
                 <i class="fa-solid fa-wrench"></i> 
                 <span th:text="#{update}"></span>
                 </a> 
                 </td>
-                <td> <a href="#" class="btn btn-primary"><i class="fa-solid fa-eye"></i> <span th:text="#{show}"></span>
-                    </a> </td>
+                
+                <td> 
+                <a th:href="@{/find/company/{id}(id=${company.id})}" class="btn btn-primary">
+                <i class="fa-solid fa-eye"></i> 
+                <span th:text="#{show}"></span>
+                 </a> 
+                </td>
+                    
                 <td> <a 
                           th:href="@{/delete/company/{id}(id=${company.id})}" 
                           th:onclick="if(!(confirm('Silmek İstiyor musunuz ?'))) return false"

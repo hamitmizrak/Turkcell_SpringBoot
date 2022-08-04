@@ -70,7 +70,7 @@ public class CompanyController implements ICompanyMvc {
 	@Override
 	public String getCreateCompany(Model model) {
 		model.addAttribute("company_key", new CompanyDto());
-		return "create_company";
+		return "company_create";
 	}
 	
 	// CREATE POST
@@ -81,7 +81,7 @@ public class CompanyController implements ICompanyMvc {
 			BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			log.error(bindingResult);
-			return "create_company";
+			return "company_create";
 		}
 		// ModelMapper
 		CompanyEntity entity = modelMapper.map(companyDto, CompanyEntity.class);
@@ -109,6 +109,7 @@ public class CompanyController implements ICompanyMvc {
 		Optional<CompanyEntity> findData = repository.findById(id);
 		if (findData.isPresent()) {
 			model.addAttribute("company_key", findData.get());
+			return "company_detail_page";
 		} else {
 			model.addAttribute("company_not_found", id + " ID data yoktur");
 		}
