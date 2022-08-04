@@ -40,22 +40,10 @@
 <body class="container bg-dark44 text-warning44">
     <!-- start codes -->
     <!-- table.table.hover.table-strpied.table>thead>tr>th{item $}*3^^tbody>tr>td{item $}*3-->
-    <p class="display-4 mt-5 mb-5">Şirket </p>
+    <p class="display-4 mt-5 mb-5 uppercase text-center">Şirket </p>
     
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modelId">
-        ADD
-    </button>
-    
-    
-    <!-- Modal -->
-
-                    
-                    
            <form th:action="@{/save/company}" th:object="${company_key}" th:method="post">
-           			
-				       
+           			    
 				<div class="form-group">
 					<input type="text" th:field="*{companyName}" class="form-control mb-4" 
 						name="companyName" id="companyName" placeholder="companyName giriniz" 
@@ -116,6 +104,7 @@
 				<div class="text-center mt-5 mb-5">
 					<input type="reset" class="btn btn-danger" value="TEMİZLE" />
 					<input type="submit" class="btn btn-primary" value="GÖNDER" />
+					<a th:href="@{/list/company}" class="btn btn-warning">LIST</a>
 				</div>
 			</form>
               

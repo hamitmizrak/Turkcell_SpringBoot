@@ -1,5 +1,8 @@
 package com.hamitmizrak.dto;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -52,5 +55,15 @@ public class CompanyDto {
 	
 	@NotEmpty(message = "Şirket kuruluş yılı boş bırakılamaz")
 	private String foundationYear;
+	
+	// date
+	public String getNowDate() {
+		Locale locale = new Locale("tr", "TR");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMMM-yyyy hh:mm:ss", locale);
+		String change = formatter.format(new java.util.Date(System.currentTimeMillis()));
+		return change;
+	}
+	
+	private String creationDateManuel = getNowDate();
 	
 }
