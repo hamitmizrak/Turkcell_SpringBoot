@@ -41,36 +41,36 @@
     <!-- start codes -->
     <!-- table.table.hover.table-strpied.table>thead>tr>th{item $}*3^^tbody>tr>td{item $}*3-->
     <p class="display-4 mt-5 mb-5">Şirket </p>
-    
+
 
     <!--Dikkatttt: save öncesinde slash(/) yazmayı unutma-->
-    <a th:href="@{/save/company}" class="btn btn-primary btn-sm"  >
+    <a th:href="@{/save/company}" class="btn btn-primary btn-sm">
         EKLE
     </a>
-    
-   
+
+
     <table class="table hover table-strpied table">
         <thead>
             <tr>
                 <th th:text="#{companyId}" class="uppercase"></th>
-                 <th th:text="#{companyName}" class="uppercase"></th>
-                 <th th:text="#{companyLogo}" class="uppercase"></th>
-                  <th th:text="#{companyPassword}" class="uppercase"></th>
-                  <th th:text="#{companyEmailAddress}" class="uppercase"></th>
-                  <th th:text="#{companyTaxNumber}" class="uppercase"></th>
-                  <th th:text="#{companyMessage}" class="uppercase"></th>
-                  <th th:text="#{companyTelephoneNumber}" class="uppercase"></th>
-                  <th th:text="#{foundationYear}" class="uppercase"></th>
+                <th th:text="#{companyName}" class="uppercase"></th>
+                <th th:text="#{companyLogo}" class="uppercase"></th>
+                <th th:text="#{companyPassword}" class="uppercase"></th>
+                <th th:text="#{companyEmailAddress}" class="uppercase"></th>
+                <th th:text="#{companyTaxNumber}" class="uppercase"></th>
+                <th th:text="#{companyMessage}" class="uppercase"></th>
+                <th th:text="#{companyTelephoneNumber}" class="uppercase"></th>
+                <th th:text="#{foundationYear}" class="uppercase"></th>
                 <th th:text="#{update}" class="uppercase"></th>
                 <th th:text="#{show}" class="uppercase"></th>
                 <th th:text="#{delete}" class="uppercase"></th>
-                
+
             </tr>
         </thead>
         <tbody>
             <tr th:if="${company.id>0}" th:each="company:${company_key}">
                 <td th:text="${company.id}"></td>
-                 <td th:text="${company.companyName}"></td>
+                <td th:text="${company.companyName}"></td>
                 <td th:text="${company.companyLogo}"></td>
                 <td th:text="${company.companyPassword}"></td>
                 <td th:text="${company.companyEmailAddress}"></td>
@@ -78,17 +78,27 @@
                 <td th:text="${company.companyMessage}"></td>
                 <td th:text="${company.companyTelephoneNumber}"></td>
                 <td th:text="${company.foundationYear}"></td>
-                <td> <a href="#" class="btn btn-warning"><i class="fa-solid fa-wrench"></i> <span th:text="#{update}"></span></a> </td>
-                <td> <a href="#" class="btn btn-primary"><i class="fa-solid fa-eye"></i> <span th:text="#{show}"></span> </a> </td>
-                <td> <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> <span th:text="#{delete}"></span></a>
+                <td> <a href="#" class="btn btn-warning">
+                <i class="fa-solid fa-wrench"></i> 
+                <span th:text="#{update}"></span>
+                </a> 
+                </td>
+                <td> <a href="#" class="btn btn-primary"><i class="fa-solid fa-eye"></i> <span th:text="#{show}"></span>
+                    </a> </td>
+                <td> <a 
+                          th:href="@{/delete/company/{id}(id=${company.id})}" 
+                          th:onclick="if(!(confirm('Silmek İstiyor musunuz ?'))) return false"
+                          class="btn btn-danger">
+                          <i class="fa-solid fa-trash-can"></i> 
+                          <span th:text="#{delete}"></span></a>
                 </td>
             </tr>
         </tbody>
     </table>
 
-   
- <!-- ends codes -->
+    <!-- ends codes -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

@@ -27,7 +27,7 @@ public class CompanyBean {
 	@Bean
 	public void companyAllData() {
 		int counter = 0;
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 1; i <= 5; i++) {
 			CompanyEntity companyEntity = CompanyEntity.builder().companyEmailAddress("email adres" + i)
 					.companyLogo("Logo" + i).companyMessage("Message" + i).companyName("company name" + i)
 					.companyPassword("şifre" + i).companyTelephoneNumber("Telefon" + i).companyTaxNumber(randomNumber())
