@@ -23,20 +23,10 @@ public interface ICompanyMvc {
 	public String findCompany(Long id, Model model);
 	
 	// UPDATE
-	public String updateCompanyById(Long companyId, String companyName, String companyLogo, String companyPassword,
-			String companyEmailAddress, String companyMessage, String companyTelephoneNumber, int companyTaxNumber,
-			String foundationYear, Model model);
+	public String updateCompanyUpdateGetForm(Long id, Model model);
+	
+	public String updateCompanyUpdatePostForm(CompanyDto companyDto, Long id, BindingResult bindingResult);
 	
 	// DELETE
 	public String deleteCompany(Long id, Model model);
-	
-	// private String companyName;
-	// private String companyLogo;
-	// private String companyPassword;
-	// private String companyEmailAddress;
-	// private int companyTaxNumber;
-	// private String companyMessage;
-	// private String companyTelephoneNumber;
-	// private Date foundationYear;
-	
 }

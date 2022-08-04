@@ -15,6 +15,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// Lombok
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -40,8 +41,8 @@ public class CompanyDto {
 	private String companyEmailAddress;
 	
 	@Min(value = 10, message = "10 küçük vergi numarası olamaz")
-	@Max(value = 100, message = "10 büyük vergi numarası olamaz")
-	private int companyTaxNumber;
+	@Max(value = 100, message = "100 büyük vergi numarası olamaz")
+	private int companyTaxNumber = 10;
 	
 	@NotEmpty(message = "Şirket messajı boş geçilemez")
 	@Size(min = 1, max = 20, message = "1 küçük karakter veya 20 büyük karakter giremezsiniz")
@@ -57,13 +58,14 @@ public class CompanyDto {
 	private String foundationYear;
 	
 	// date
+	private String creationDateManuel = getNowDate();
+	
 	public String getNowDate() {
 		Locale locale = new Locale("tr", "TR");
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMMM-yyyy hh:mm:ss", locale);
-		String change = formatter.format(new java.util.Date(System.currentTimeMillis()));
+		// String change = formatter.format(new
+		// java.util.Date(System.currentTimeMillis()));
+		String change = formatter.format(new java.util.Date());
 		return change;
 	}
-	
-	private String creationDateManuel = getNowDate();
-	
 }

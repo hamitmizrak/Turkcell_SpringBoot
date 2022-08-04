@@ -1,0 +1,95 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title>List Employees</title>
+		
+		<link rel="stylesheet" 
+			type="text/css" 
+			href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+		<link rel="stylesheet" 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
+			crossorigin="anonymous" />
+	</head>
+	
+	<body>
+		
+		<div class="container">
+		
+			<h3>List Employees</h3>
+			
+			<hr/>
+			<a th:href="@{/addEmployeeForm}" class="btn btn-primary">Add Employee</a>
+			<br/><br/>
+			
+			    <table class="table hover table-strpied table"  id="employeeTable">
+        <thead>
+            <tr>
+                <th th:text="#{companyId}" class="uppercase"></th>
+                <th th:text="#{companyName}" class="uppercase"></th>
+                <th th:text="#{companyLogo}" class="uppercase"></th>
+                <th th:text="#{companyPassword}" class="uppercase"></th>
+                <th th:text="#{companyEmailAddress}" class="uppercase"></th>
+                <th th:text="#{companyTaxNumber}" class="uppercase"></th>
+                <th th:text="#{companyMessage}" class="uppercase"></th>
+                <th th:text="#{companyTelephoneNumber}" class="uppercase"></th>
+                <th th:text="#{foundationYear}" class="uppercase"></th>
+                <th th:text="#{update}" class="uppercase"></th>
+                <th th:text="#{show}" class="uppercase"></th>
+                <th th:text="#{delete}" class="uppercase"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${company.id>0}" th:each="company:${company_key}">
+                <td th:text="${company.id}"></td>
+                <td th:text="${company.companyName}"></td>
+                <td th:text="${company.companyLogo}"></td>
+                <td th:text="${company.companyPassword}"></td>
+                <td th:text="${company.companyEmailAddress}"></td>
+                <td th:text="${company.companyTaxNumber}"></td>
+                <td th:text="${company.companyMessage}"></td>
+                <td th:text="${company.companyTelephoneNumber}"></td>
+                <td th:text="${company.foundationYear}"></td>
+          
+                <td> <a th:href="@{/update/company/{id}(id=${company.id})}" class="btn btn-info">
+                <i class="fa-solid fa-wrench"></i> 
+                <span th:text="#{update}"></span>
+                </a> 
+                </td>
+                
+                <td> 
+                <a th:href="@{/find/company/{id}(id=${company.id})}" class="btn btn-primary">
+                <i class="fa-solid fa-eye"></i> 
+                <span th:text="#{show}"></span>
+                 </a> 
+                </td>
+                   
+                <td> <a 
+                          th:href="@{/delete/company/{id}(id=${company.id})}" 
+                          th:onclick="if(!(confirm('Silmek İstiyor musunuz ?'))) return false"
+                          class="btn btn-danger">
+                          <i class="fa-solid fa-trash-can"></i> 
+                          <span th:text="#{delete}"></span></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+			
+		</div>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#employeeTable").DataTable({
+						'aoColumnDefs': [{
+        				'bSortable': false,
+        				'aTargets': [-1] /* 1st one, start by the right */
+    				}]
+				});
+			})
+		</script>
+	</body>
+	
+</html>

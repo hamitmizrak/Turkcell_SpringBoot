@@ -28,13 +28,12 @@ public class CompanyBean {
 	public void companyAllData() {
 		int counter = 0;
 		for (int i = 1; i <= 5; i++) {
-			CompanyEntity companyEntity = CompanyEntity.builder().companyEmailAddress("email adres" + i)
+			CompanyEntity companyEntity = CompanyEntity.builder().companyEmailAddress("hamitmizrak@gmail.com")
 					.companyLogo("Logo" + i).companyMessage("Message" + i).companyName("company name" + i)
-					.companyPassword("şifre" + i).companyTelephoneNumber("Telefon" + i).companyTaxNumber(randomNumber())
-					.build();
+					.companyPassword("Hm12345").companyTelephoneNumber("+901112223344").companyTaxNumber(randomNumber())
+					.foundationYear("2022").build();
 			repository.save(companyEntity);
 			counter++;
 		}
 	}
-	
 }

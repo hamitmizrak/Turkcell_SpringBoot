@@ -22,6 +22,7 @@ import lombok.ToString;
 @Builder
 @ToString
 
+// Entity
 @Entity
 @Table(name = "company")
 public class CompanyEntity extends BaseEntity implements Serializable {

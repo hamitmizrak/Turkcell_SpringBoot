@@ -120,57 +120,32 @@ public class CompanyController implements ICompanyMvc {
 		return "redirect:/list/company";
 	}
 	
-	// private String companyLogo;
-	// private String companyPassword;
-	// private String companyEmailAddress;
-	// private int companyTaxNumber;
-	// private String companyMessage;
-	// private String companyTelephoneNumber;
-	// private Date foundationYear;
-	
-	// UPDATE
-	// http://localhost:8080/update/company/1/company_name/company_logo/company_password/company_address/company_message/company_telephone_number/15/company_foundation_year
-	// @Override
-	// @GetMapping("/update/company/{company_id}/{company_name}/{company_logo}/{company_password}/{company_address}/{company_message}/{company_telephone_number}/{company_tax_number/{company_foundation_year}")
-	// public String updateCompanyById(@PathVariable(name = "company_id") Long
-	// companyId,
-	// @PathVariable(name = "company_name") String companyName,
-	// @PathVariable(name = "company_logo") String companyLogo,
-	// @PathVariable(name = "company_password") String companyPassword,
-	// @PathVariable(name = "company_address") String companyEmailAddress,
-	// @PathVariable(name = "company_message") String companyMessage,
-	// @PathVariable(name = "company_telephone_number") String
-	// companyTelephoneNumber,
-	// @PathVariable(name = "company_tax_number") int companyTaxNumber,
-	// @PathVariable(name = "company_foundation_year") String foundationYear, Model
-	// model) {
-	//
-	// Optional<CompanyEntity> findByIdEntity = repository.findById(companyId);
-	// if (findByIdEntity.isPresent()) {
-	// // ürünü getirmek
-	// CompanyEntity entity = findByIdEntity.get();
-	// entity.setCompanyEmailAddress(companyEmailAddress);
-	// entity.setCompanyLogo(companyLogo);
-	// entity.setCompanyMessage(companyMessage);
-	// entity.setCompanyName(companyName);
-	// entity.setCompanyPassword(companyPassword);
-	// entity.setCompanyTaxNumber(companyTaxNumber);
-	// entity.setCompanyTelephoneNumber(companyTelephoneNumber);
-	// // entity.setFoundationYear(foundationYear);
-	// repository.save(entity);
-	// model.addAttribute("entity_key", entity);
-	// } else {
-	// model.addAttribute("company_not_found", companyId + " numaralı ID Yoktur.");
-	// }
-	// return "redirect:/list/company";
-	// }
+	@Override
+	@GetMapping("update/company/{id}")
+	public String updateCompanyUpdateGetForm(@PathVariable(name = "id") Long id, Model model) {
+		Optional<CompanyEntity> findData = repository.findById(id);
+		if (findData.isPresent()) {
+			model.addAttribute("company_update", findData.get());
+			return "company_update";
+		} else {
+			model.addAttribute("company_not_found", id + " ID data yoktur");
+		}
+		
+		return "redirect:/list/company";
+	}
 	
 	@Override
-	public String updateCompanyById(Long companyId, String companyName, String companyLogo, String companyPassword,
-			String companyEmailAddress, String companyMessage, String companyTelephoneNumber, int companyTaxNumber,
-			String foundationYear, Model model) {
-		// TODO Auto-generated method stub
-		return null;
+	@PostMapping("update/company/{id}")
+	public String updateCompanyUpdatePostForm(@Valid @ModelAttribute("company_update") CompanyDto companyDto,
+			@PathVariable(name = "id") Long id, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			log.error(bindingResult);
+			return "company_update";
+		}
+		// ModelMapper
+		CompanyEntity entity = modelMapper.map(companyDto, CompanyEntity.class);
+		repository.save(entity);
+		return "redirect:/list/company";
 	}
 	
 	// DELETE
@@ -271,118 +246,118 @@ public class CompanyController implements ICompanyMvc {
 	@GetMapping("find/company/delivedquery/{company_name}")
 	// @ResponseBody
 	public String findProductName(@PathVariable(name = "company_name") String companyName, Model model) {
-		// http://localhost:8080/find/company/delivedquer/hamit 9
+		//// http://localhost:8080/find/company/delivedquer/hamit 9
 		// List<CompanyEntity> listem =
 		// repository.findProductEntitiesByProductName(productName);
 		// List<CompanyEntity> listem = repository.findByProductName(productName);
 		// model.addAttribute("entity_key", listem);
 		
-		// starts
-		// http://localhost:8080/find/company/delivedquer/h
+		//// starts
+		//// http://localhost:8080/find/company/delivedquer/h
 		// List<CompanyEntity> listem =
 		// repository.findByProductNameStartingWith(productName);
 		// List<CompanyEntity> listem =
 		// repository.findByProductNameStartsWith(productName);
 		// model.addAttribute("entity_key", listem);
 		
-		// ends
-		// http://localhost:8080/find/company/delivedquer/1
+		//// ends
+		//// http://localhost:8080/find/company/delivedquer/1
 		// List<CompanyEntity> listem =
 		// repository.findByProductNameEndsWith(productName);
 		// model.addAttribute("entity_key", listem);
 		
-		// equals
-		// http://localhost:8080/find/company/delivedquer/hamit 1
-		// http://localhost:8080/find/company/delivedquer/hamit%201
+		//// equals
+		//// http://localhost:8080/find/company/delivedquer/hamit 1
+		//// http://localhost:8080/find/company/delivedquer/hamit%201
 		// List<CompanyEntity> listem = repository.findByProductNameEquals(productName);
 		// List<CompanyEntity> listem = repository.findByProductNameIs(productName);
 		// model.addAttribute("entity_key", listem);
 		
-		// not
-		// http://localhost:8080/find/company/delivedquer/hamit 1
-		// http://localhost:8080/find/company/delivedquer/hamit%201
+		//// not
+		//// http://localhost:8080/find/company/delivedquer/hamit 1
+		//// http://localhost:8080/find/company/delivedquer/hamit%201
 		// List<CompanyEntity> listem = repository.findByProductNameNot(productName);
 		// List<CompanyEntity> listem = repository.findByProductNameIsNot(productName);
 		// model.addAttribute("entity_key", listem);
 		
-		// distinct: tekrar etmeyen listelemek
+		//// distinct: tekrar etmeyen listelemek
 		// http://localhost:8080/find/company/delivedquer/hamit 1
 		// List<CompanyEntity> listem =
 		// repository.findDistinctByProductName(productName);
 		// model.addAttribute("entity_key", listem);
 		
-		// like
-		// http://localhost:8080/find/company/delivedquer/hamit
-		// başlayan
+		//// like
+		//// http://localhost:8080/find/company/delivedquer/hamit
+		//// başlayan
 		// List<CompanyEntity> listem = repository.findByProductNameLike( productName +
 		// "%");
-		// içinde geçen
+		//// içinde geçen
 		// List<CompanyEntity> listem = repository.findByProductNameLike("%" +
 		// productName + "%");
-		// biten
+		//// biten
 		// List<CompanyEntity> listem = repository.findByProductNameLike("%" +
 		// productName);
 		// model.addAttribute("entity_key", listem);
 		
-		// productPrice
-		// productPrice:200 olanları bana listele
-		// http://localhost:8080/find/company/delivedquer/hamit
+		//// productPrice
+		//// productPrice:200 olanları bana listele
+		//// http://localhost:8080/find/company/delivedquer/hamit
 		// List<CompanyEntity> listem =
 		// repository.findByProductPrice(Double.valueOf(200));
 		// model.addAttribute("entity_key", listem);
 		
-		// GreaterThan: verilen sayıdadan büyük olanları
-		// http://localhost:8080/find/company/delivedquer/hamit
+		//// GreaterThan: verilen sayıdadan büyük olanları
+		//// http://localhost:8080/find/company/delivedquer/hamit
 		// List<CompanyEntity> listem = repository.findByProductPriceGreaterThan(300);
 		// model.addAttribute("entity_key", listem);
 		
-		// Beetween
-		// http://localhost:8080/find/company/delivedquer/hamit
+		//// Beetween
+		//// http://localhost:8080/find/company/delivedquer/hamit
 		// List<CompanyEntity> listem = repository.findByProductPriceBetween(200, 500);
 		// model.addAttribute("entity_key", listem);
 		
-		// Çoklu arama
-		// http://localhost:8080/find/company/delivedquer/hamit 1
-		// http://localhost:8080/find/company/delivedquer/hamit%201
+		//// Çoklu arama
+		//// http://localhost:8080/find/company/delivedquer/hamit 1
+		//// http://localhost:8080/find/company/delivedquer/hamit%201
 		// List<CompanyEntity> listem =
 		// repository.findByProductNameOrProductCodeAllIgnoreCase("hamit 1",
 		// "a20953df-120a-4203-989b-1c77096122fa");
 		// model.addAttribute("entity_key", listem);
 		
-		// order by sıralama: küçükten büyüğe sıralamak
-		// http://localhost:8080/find/company/delivedquer/hamit
+		//// order by sıralama: küçükten büyüğe sıralamak
+		//// http://localhost:8080/find/company/delivedquer/hamit
 		// List<CompanyEntity> listem =
 		// repository.findByProductNameContainingOrderByProductName(productName);
 		// model.addAttribute("entity_key", listem);
 		
-		// order by sıralama: büyükten küçüğe sıralamak
-		// http://localhost:8080/find/company/delivedquer/hamit
+		//// order by sıralama: büyükten küçüğe sıralamak
+		//// http://localhost:8080/find/company/delivedquer/hamit
 		// List<CompanyEntity> listem =
 		// repository.findByProductNameContainingOrderByProductNameDesc(productName);
 		// model.addAttribute("entity_key", listem);
 		
-		// limit
-		// http://localhost:8080/find/company/delivedquer/hamit
+		//// limit
+		//// http://localhost:8080/find/company/delivedquer/hamit
 		// Tepe 1
 		// List<CompanyEntity> listem = repository.findFirstByOrderById();
 		// List<CompanyEntity> listem = repository.findTopByOrderByProductName();
 		// List<CompanyEntity> listem = repository.findFirst4ByOrderById(); //
 		// model.addAttribute("entity_key", listem);
 		
-		// delete
-		// http://localhost:8080/find/company/delivedquer/hamit
+		//// delete
+		//// http://localhost:8080/find/company/delivedquer/hamit
 		// repository.deleteById(Long.valueOf(1)); //
 		
-		// null not
-		// http://localhost:8080/find/company/delivedquer/hamit 1
-		// http://localhost:8080/find/company/delivedquer/hamit%201
+		//// null not
+		//// http://localhost:8080/find/company/delivedquer/hamit 1
+		//// http://localhost:8080/find/company/delivedquer/hamit%201
 		// List<CompanyEntity> listem = repository.findByProductNameIsNull(productName);
 		// List<CompanyEntity> listem = repository.findByProductNameIsNot(productName);
 		// model.addAttribute("entity_key", listem);
 		
-		// count
-		// http://localhost:8080/find/company/delivedquer/hamit 2
-		// http://localhost:8080/find/company/delivedquer/hamit%201
+		//// count
+		//// http://localhost:8080/find/company/delivedquer/hamit 2
+		//// http://localhost:8080/find/company/delivedquer/hamit%201
 		// int countName = repository.countByProductName(productName);
 		// model.addAttribute("entity_count_key", countName);
 		
