@@ -54,7 +54,7 @@ public class CompanyController implements ICompanyMvc {
 	// otomatik 10 data eklensin
 	@Override
 	@GetMapping("company/data/all")
-	@ResponseBody
+	// @ResponseBody
 	public String createAllCompany(Model model) {
 		int counter = 0;
 		for (int i = 1; i <= 10; i++) {
@@ -65,7 +65,8 @@ public class CompanyController implements ICompanyMvc {
 			repository.save(companyEntity);
 			counter++;
 		}
-		return counter + " tane Company oluşturuldu";
+		model.addAttribute("data_key", counter + " tane Company oluşturuldu");
+		return "redirect:/list/company";
 	}
 	
 	// CREATE GET
@@ -137,8 +138,8 @@ public class CompanyController implements ICompanyMvc {
 	// UPDATE POST
 	@Override
 	@PostMapping("update/company/{id}")
-	public String updateCompanyUpdatePostForm(@Valid @ModelAttribute("company_update") CompanyDto companyDto,
-			@PathVariable(name = "id") Long id, BindingResult bindingResult) {
+	public String updateCompanyUpdatePostForm(@PathVariable(name = "id") Long id,
+			@Valid @ModelAttribute("company_update") CompanyDto companyDto, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			log.error(bindingResult);
 			return "company_update";

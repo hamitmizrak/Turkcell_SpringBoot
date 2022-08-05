@@ -50,6 +50,8 @@
 			<hr/>
 			  <!--Dikkatttt: save öncesinde slash(/) yazmayı unutma-->
 			<a th:href="@{/save/company}" class="btn btn-primary">Şirket Ekle</a>
+			<a th:href="@{/company/data/all}" class="btn btn-warning">All Data</a>
+			<p th:text="${data_key}"></p>
 			<br/><br/>
 
 
@@ -68,9 +70,9 @@
                 <th th:text="#{update}" class="uppercase"></th>
                 <th th:text="#{show}" class="uppercase"></th>
                 <th th:text="#{delete}" class="uppercase"></th>
-
             </tr>
         </thead>
+        
         <tbody>
             <tr th:if="${company.id>0}" th:each="company:${company_key}">
                 <td th:text="${company.id}"></td>

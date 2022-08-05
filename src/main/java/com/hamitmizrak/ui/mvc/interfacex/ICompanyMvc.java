@@ -25,7 +25,8 @@ public interface ICompanyMvc {
 	// UPDATE
 	public String updateCompanyUpdateGetForm(Long id, Model model);
 	
-	public String updateCompanyUpdatePostForm(CompanyDto companyDto, Long id, BindingResult bindingResult);
+	// UPDATE: önce id gelsin sonra Dto yoksa hata yaşarsın
+	public String updateCompanyUpdatePostForm(Long id, CompanyDto companyDto, BindingResult bindingResult);
 	
 	// DELETE
 	public String deleteCompany(Long id, Model model);
