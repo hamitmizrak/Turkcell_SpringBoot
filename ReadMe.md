@@ -1,7 +1,9 @@
 ![](https://komarev.com/ghpvc/?username=hamitmizrak)
 
-# 
-* [GitHub](https://)
+![readme](./picture/readme.jpg)
+
+# Turkcell Java Full Stack 2022
+* [GitHub](https://https://github.com/hamitmizrak/Turkcell_SpringBoot)
 * 
 ### Gereksinimler
 Java 18
