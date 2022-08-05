@@ -96,17 +96,26 @@
                  </a> 
                 </td>
                    
+             <!--   
                 <td> <a  th:href="@{/delete/company/{id}(id=${company.id})}" 
                           th:onclick="if(!(confirm('Silmek İstiyor musunuz ?'))) return false"
                           class="btn btn-danger  btn-sm">
                           <i class="fa-solid fa-trash-can"></i> 
-                          <!-- <span th:text="#{delete}"></span> -->
-                     </a>
-                          
+                     </a>   
                 </td>
+                 --> 
+                <td> 
+               <!-- http://localhost:8080/delete/company/1 -->
+                <a class="btn btn-danger" th:onclick="'deleteSweetAlertCompany(\'/delete/company/' + ${company.id} +'\')'">
+                <i class="fa-solid fa-trash-can"></i></a>
+                </td>
+                
+                
             </tr>
         </tbody>
     </table>
+    
+
     
         <!-- dataTables JS: paging and sorting -->
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -125,6 +134,34 @@
     <!-- ends codes -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    
+    
+    <!--  Sweet Alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
+     function deleteSweetAlertCompany(url){
+      swal({
+         title: "Silmek istediğinizden emin misiniz?",
+         text: "Silindikten sonra tekrar geri alınamaz.",
+         icon: "warning",
+         buttons: ["İptal", "Sil"],
+         dangerMode: true,
+       })
+       .then((willDelete) => {
+         if (willDelete) {
+           swal("Kayıt başarılı bir şekilde silindi.", {
+             icon: "success",
+           });
+           window.location.href = url;
+         } else {
+           swal("İptal edildi.",{
+            icon: "warning",
+           });
+         }
+       });
+     }
+     </script>
+    
 </body>
 
 </html>
