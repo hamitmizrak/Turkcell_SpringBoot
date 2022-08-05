@@ -120,6 +120,7 @@ public class CompanyController implements ICompanyMvc {
 		return "redirect:/list/company";
 	}
 	
+	// UPDATE GET
 	@Override
 	@GetMapping("update/company/{id}")
 	public String updateCompanyUpdateGetForm(@PathVariable(name = "id") Long id, Model model) {
@@ -130,10 +131,10 @@ public class CompanyController implements ICompanyMvc {
 		} else {
 			model.addAttribute("company_not_found", id + " ID data yoktur");
 		}
-		
 		return "redirect:/list/company";
 	}
 	
+	// UPDATE POST
 	@Override
 	@PostMapping("update/company/{id}")
 	public String updateCompanyUpdatePostForm(@Valid @ModelAttribute("company_update") CompanyDto companyDto,

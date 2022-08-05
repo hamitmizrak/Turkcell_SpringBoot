@@ -35,9 +35,8 @@
     <link rel="stylesheet" th:href="@{/css/template.css}">
     <script th:src="@{/js/template.js}"></script>
     
-    <link rel="stylesheet" 
-			type="text/css" 
-			href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+    <!-- dataTables CSS: paging and sorting -->
+    <link rel="stylesheet" 	type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
 
 </head>
 
@@ -46,15 +45,15 @@
     <!-- table.table.hover.table-strpied.table>thead>tr>th{item $}*3^^tbody>tr>td{item $}*3-->
 
 
-<h3>Şirket</h3>
+			<h3>Şirket Listesi</h3>
 			
 			<hr/>
 			  <!--Dikkatttt: save öncesinde slash(/) yazmayı unutma-->
-			<a th:href="@{/save/company}" class="btn btn-primary">Company Ekle</a>
+			<a th:href="@{/save/company}" class="btn btn-primary">Şirket Ekle</a>
 			<br/><br/>
 
 
-			    <table class="table table-hover table-strpied"  id="employeeTable">
+	<table class="table table-hover table-strpied"  id="datalistcompanyTable">
         <thead>
             <tr>
                 <th th:text="#{companyId}" class="uppercase"></th>
@@ -97,52 +96,30 @@
                  </a> 
                 </td>
                    
-                <td> <a 
-                          th:href="@{/delete/company/{id}(id=${company.id})}" 
+                <td> <a  th:href="@{/delete/company/{id}(id=${company.id})}" 
                           th:onclick="if(!(confirm('Silmek İstiyor musunuz ?'))) return false"
                           class="btn btn-danger  btn-sm">
                           <i class="fa-solid fa-trash-can"></i> 
                           <!-- <span th:text="#{delete}"></span> -->
-                          </a>
+                     </a>
                           
                 </td>
             </tr>
         </tbody>
     </table>
     
-    		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- dataTables JS: paging and sorting -->
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
 		<script>
 			$(document).ready(function() {
-				$("#employeeTable").DataTable({
+				$("#datalistcompanyTable").DataTable({
 						'aoColumnDefs': [{
         				'bSortable': false,
         				'aTargets': [-1] /* 1st one, start by the right */
     				}]
 				});
 			})
-		</script>
-		
-		<script>
-
-		swal({
-			  title: "Are you sure?",
-			  text: "You will not be able to recover this imaginary file!",
-			  type: "warning",
-			  showCancelButton: true,
-			  confirmButtonClass: "btn-danger",
-			  confirmButtonText: "Yes, delete it!",
-			  cancelButtonText: "No, cancel plx!",
-			  closeOnConfirm: false,
-			  closeOnCancel: false
-			},
-			function(isConfirm) {
-			  if (isConfirm) {
-			    swal("Deleted!", "Your imaginary file has been deleted.", "success");
-			  } else {
-			    swal("Cancelled", "Your imaginary file is safe :)", "error");
-			  }
-			});
 		</script>
     
     <!-- ends codes -->

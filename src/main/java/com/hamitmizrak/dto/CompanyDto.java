@@ -48,7 +48,7 @@ public class CompanyDto {
 	@Size(min = 1, max = 20, message = "1 küçük karakter veya 20 büyük karakter giremezsiniz")
 	private String companyMessage;
 	
-	// +995 111 123456
+	// +901112223344
 	@NotEmpty(message = "Şirket telefon no  boş geçilemez")
 	@Size(min = 3, max = 15, message = "kullanıcı numarası min:3 max:15 olabilir")
 	@Pattern(regexp = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$")
