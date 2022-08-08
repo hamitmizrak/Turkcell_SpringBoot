@@ -1,6 +1,8 @@
 package com.hamitmizrak.ui.rest.impl;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -95,6 +97,7 @@ public class AdminRestController {
 	
 	///////////////////////////////////////////////////////////////////////
 	
+	// servlet secret
 	@Autowired
 	private ServletContext servletContext;
 	
@@ -116,6 +119,31 @@ public class AdminRestController {
 		String secretInformation = servletContext.getInitParameter("benimsifrem");
 		log.info(secretInformation);
 		return ResponseEntity.ok(secretInformation);
+	}
+	
+	// servlet request response
+	// http://localhost:8080/api/v1/rest/object10
+	@GetMapping("rest/object10")
+	@ResponseBody
+	public ResponseEntity<?> getRest10(HttpServletRequest request, HttpServletResponse response) {
+		
+		// URI
+		String uri = request.getRequestURI();
+		log.info(uri);
+		
+		// LocalAddress
+		String localAddress = request.getLocalAddr();
+		log.info(localAddress);
+		
+		// Session
+		String session = request.getSession().toString();
+		log.info(session);
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append("uri: " + uri).append(" session: " + session).append(" localAddress: " + localAddress);
+		String changeTo = builder.toString();
+		
+		return ResponseEntity.ok(changeTo);
 	}
 	
 }
