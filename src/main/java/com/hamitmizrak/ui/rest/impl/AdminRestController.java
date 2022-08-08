@@ -1,5 +1,6 @@
 package com.hamitmizrak.ui.rest.impl;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,9 +23,17 @@ public class AdminRestController {
 				+ "  \"java\":{\r\n" + "    \"name\":\"javase\",\r\n" + "    \"version\":\"18\"\r\n" + "  }\r\n" + "}";
 	}
 	
-	// http://localhost:8080/api/v1/rest/object
-	@GetMapping("rest/object")
+	// http://localhost:8080/api/v1/rest/object2
+	@GetMapping(value = "rest/object2")
 	public AdminDto getRest2() {
+		AdminDto adminDto = AdminDto.builder().adminId(0L).adminName("admin adı").adminSurname("admin soyadı").build();
+		return adminDto;
+	}
+	
+	// http://localhost:8080/api/v1/rest/object3
+	// import org.springframework.http.MediaType;
+	@GetMapping(value = "rest/object3", produces = MediaType.APPLICATION_JSON_VALUE)
+	public AdminDto getRest3() {
 		AdminDto adminDto = AdminDto.builder().adminId(0L).adminName("admin adı").adminSurname("admin soyadı").build();
 		return adminDto;
 	}
