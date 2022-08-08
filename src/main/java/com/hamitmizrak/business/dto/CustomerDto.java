@@ -1,4 +1,4 @@
-package com.hamitmizrak.dto;
+package com.hamitmizrak.business.dto;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

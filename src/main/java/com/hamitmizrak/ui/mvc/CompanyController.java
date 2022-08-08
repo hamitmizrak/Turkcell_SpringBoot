@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hamitmizrak.business.dto.CompanyDto;
 import com.hamitmizrak.data.entity.CompanyEntity;
 import com.hamitmizrak.data.repository.ICompanyRepository;
-import com.hamitmizrak.dto.CompanyDto;
 import com.hamitmizrak.ui.mvc.interfacex.ICompanyMvc;
 
 import lombok.extern.log4j.Log4j2;

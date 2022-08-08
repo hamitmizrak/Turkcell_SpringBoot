@@ -3,7 +3,7 @@ package com.hamitmizrak.ui.mvc.interfacex;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
-import com.hamitmizrak.dto.CompanyDto;
+import com.hamitmizrak.business.dto.CompanyDto;
 
 public interface ICompanyMvc {
 	

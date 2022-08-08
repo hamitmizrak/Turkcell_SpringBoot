@@ -6,12 +6,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
 
-import com.hamitmizrak.dto.ProductDto;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import com.hamitmizrak.business.dto.ProductDto;
 
 import lombok.extern.log4j.Log4j2;
 

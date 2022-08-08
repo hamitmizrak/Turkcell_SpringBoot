@@ -31,7 +31,7 @@
 	
 <!--dependencies-->
 	<dependencies>
-	       <!--Spring Web Mvc Rest-->
+	       <!--Spring Web Mvc - Rest-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
