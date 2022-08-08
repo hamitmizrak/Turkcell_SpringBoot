@@ -1,8 +1,15 @@
 package com.hamitmizrak.ui.rest.impl;
 
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hamitmizrak.business.dto.AdminDto;
@@ -49,6 +56,66 @@ public class AdminRestController {
 	public AdminDto getRest4() {
 		AdminDto adminDto = AdminDto.builder().adminId(0L).adminName("admin adı").adminSurname("admin soyadı").build();
 		return adminDto;
+	}
+	///////////////////////////////////////////////////////////////////////
+	
+	// http://localhost:8080/api/v1/rest/object5/5
+	@GetMapping("rest/object5/{id}")
+	public AdminDto getRest5(@PathVariable(name = "id", required = false) Long id) {
+		AdminDto adminDto = AdminDto.builder().adminId(id).adminName("admin adı").adminSurname("admin soyadı").build();
+		return adminDto;
+	}
+	
+	// http://localhost:8080/api/v1/rest/object6
+	// http://localhost:8080/api/v1/rest/object6/6
+	@GetMapping({ "rest/object6", "rest/object6/{id}" })
+	public AdminDto getRest6(@PathVariable(name = "id", required = false) Long id) {
+		AdminDto adminDto = null;
+		if (id == null) {
+			log.error("id null verilmiştir");
+		} else {
+			adminDto = AdminDto.builder().adminId(id).adminName("admin adı").adminSurname("admin soyadı").build();
+		}
+		return adminDto;
+	}
+	
+	///////////////////////////////////////////////////////////////////////
+	
+	// http://localhost:8080/api/v1/rest/object7?id=4
+	@GetMapping("rest/object7")
+	public AdminDto getRest7(@RequestParam(name = "id") Long id) {
+		AdminDto adminDto = null;
+		if (id == null) {
+			log.error("id null verilmiştir");
+		} else {
+			adminDto = AdminDto.builder().adminId(id).adminName("admin adı").adminSurname("admin soyadı").build();
+		}
+		return adminDto;
+	}
+	
+	///////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private ServletContext servletContext;
+	
+	// application.properties gizli bilgi almak
+	// http://localhost:8080/api/v1/rest/object8
+	@GetMapping("rest/object8")
+	@ResponseBody
+	public String getRest8() {
+		String secretInformation = servletContext.getInitParameter("benimsifrem");
+		log.info(secretInformation);
+		return secretInformation;
+	}
+	
+	// application.properties gizli bilgi almak
+	// http://localhost:8080/api/v1/rest/object9
+	@GetMapping("rest/object9")
+	@ResponseBody
+	public ResponseEntity<?> getRest9() {
+		String secretInformation = servletContext.getInitParameter("benimsifrem");
+		log.info(secretInformation);
+		return ResponseEntity.ok(secretInformation);
 	}
 	
 }
