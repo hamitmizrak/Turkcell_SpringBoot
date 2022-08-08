@@ -146,4 +146,36 @@ public class AdminRestController {
 		return ResponseEntity.ok(changeTo);
 	}
 	
+	///////////////////////////////////////////////////////////////////////
+	// ResponseEntity: Status code
+	// http://localhost:8080/api/v1/rest/object11
+	@GetMapping("rest/object11")
+	public ResponseEntity<AdminDto> getRest11() {
+		AdminDto adminDto = AdminDto.builder().adminId(0L).adminName("admin adı").adminSurname("admin soyadı").build();
+		// return ResponseEntity<>(adminDto,HttpStatus.OK);
+		// return ResponseEntity.status(HttpStatus.OK).body(adminDto);
+		// return ResponseEntity.status(200).body(adminDto);
+		// return ResponseEntity.ok().body(adminDto);
+		return ResponseEntity.ok(adminDto);
+	}
+	
+	// ResponseEntity: Status code
+	// http://localhost:8080/api/v1/rest/object12
+	// http:// localhost:8080/api/v1/rest/object12/0
+	// http:// localhost:8080/api/v1/rest/object12/5
+	
+	@GetMapping({ "rest/object12", "rest/object12/{id}" })
+	public ResponseEntity<AdminDto> getRest12(@PathVariable(name = "id", required = false) Long id) {
+		AdminDto adminDto = AdminDto.builder().adminId(id).adminName("admin adı").adminSurname("admin soyadı").build();
+		if (id == null) {
+			log.error("404: notfound");
+			return ResponseEntity.notFound().build();
+		} else if (id == 0) {
+			log.error("400: bad request");
+			return ResponseEntity.badRequest().build();
+		}
+		log.info(adminDto);
+		return ResponseEntity.ok(adminDto);
+	}
+	
 }
