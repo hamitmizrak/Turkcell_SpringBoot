@@ -165,7 +165,7 @@ public class AdminRestController {
 	// http:// localhost:8080/api/v1/rest/object12/5
 	
 	@GetMapping({ "rest/object12", "rest/object12/{id}" })
-	public ResponseEntity<AdminDto> getRest12(@PathVariable(name = "id", required = false) Long id) {
+	public ResponseEntity<?> getRest12(@PathVariable(name = "id", required = false) Long id) {
 		AdminDto adminDto = AdminDto.builder().adminId(id).adminName("admin adı").adminSurname("admin soyadı").build();
 		if (id == null) {
 			log.error("404: notfound");
@@ -177,5 +177,8 @@ public class AdminRestController {
 		log.info(adminDto);
 		return ResponseEntity.ok(adminDto);
 	}
+	
+	///////////////////////////////////////////////////////
+	// RestTemplate
 	
 }

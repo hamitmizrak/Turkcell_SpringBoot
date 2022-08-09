@@ -1,11 +1,14 @@
 package com.hamitmizrak.business.dto;
 
+import java.io.Serializable;
+
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class ProductDto {
+public class ProductDto implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private Long productId;
 	private String productName;
