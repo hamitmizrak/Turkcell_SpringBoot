@@ -7,6 +7,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
@@ -17,7 +18,7 @@ import com.hamitmizrak.business.dto.ProductDto;
 public class ProductController {
 	
 	// http://localhost:8080/client/controller/string
-	// SERVER
+	// CLIENT
 	@GetMapping("client/controller/string")
 	@ResponseBody
 	public String getClientData() {
@@ -30,7 +31,7 @@ public class ProductController {
 	}
 	
 	// http://localhost:8080/client/controller/productdto
-	// SERVER
+	// CLIENT
 	@GetMapping("client/controller/productdto")
 	@ResponseBody
 	public ProductDto getClientObjectData() {
@@ -43,7 +44,7 @@ public class ProductController {
 	}
 	
 	// http://localhost:8080/client/controller/path/productdto
-	// SERVER
+	// CLIENT
 	// getForObject
 	@GetMapping("client/controller/path/productdto")
 	@ResponseBody
@@ -57,7 +58,7 @@ public class ProductController {
 	}
 	
 	// http://localhost:8080/client/controller/request/productdto
-	// SERVER
+	// CLIENT
 	// exchange
 	@GetMapping("client/controller/request/productdto")
 	@ResponseBody
@@ -73,7 +74,7 @@ public class ProductController {
 	}
 	
 	// http://localhost:8080/client/controller/request/list/productdto
-	// SERVER
+	// CLIENT
 	// exchange ==>LIST
 	@GetMapping("client/controller/request/list/productdto")
 	@ResponseBody
@@ -87,6 +88,32 @@ public class ProductController {
 				});
 		List<ProductDto> listProductDto = responseEntityList.getBody();
 		return listProductDto;
+	}
+	
+	// NOT
+	// ResponseEntity ==> kullanmıyorsak
+	// ProductDto dto=restTemplate.getForObject(URL,ProductDto.class);
+	
+	// ResponseEntity ==> kullanıyorsak
+	// ResponseEntity<ProductDto> responseEntity = restTemplate.exchange(URL,
+	// HttpMethod.GET, HttpEntity.EMPTY,ProductDto.class);
+	
+	// http://localhost:8080/client/controller/request/list/thymeleaf/productdto
+	// CLIENT
+	// exchange ==>LIST
+	@GetMapping("client/controller/request/list/thymeleaf/productdto")
+	public String getClientRequestListObjectDataThymeleaf(Model model) {
+		final String URL = "http://localhost:8080/server/v1/object/response/list";
+		
+		// @RestControllerdan veri almak istiyorsam
+		RestTemplate restTemplate = new RestTemplate();
+		
+		ResponseEntity<List<ProductDto>> responseEntityList = restTemplate.exchange(URL, HttpMethod.GET,
+				HttpEntity.EMPTY, new ParameterizedTypeReference<List<ProductDto>>() {
+				});
+		List<ProductDto> listProductDto = responseEntityList.getBody();
+		model.addAttribute("rest_mvc_key", listProductDto);
+		return "product_dto_rest_mvc";
 	}
 	
 }
