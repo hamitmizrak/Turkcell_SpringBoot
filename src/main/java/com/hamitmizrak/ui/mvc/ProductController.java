@@ -175,7 +175,7 @@ public class ProductController {
 		
 	}
 	
-	// EKLE ==>ResponseEntity==> Object ==> @PostMapping
+	// EKLE ==>ResponseEntity==> Object ==> @GetMapping
 	// http://localhost:8080/client/product/post/responseentity?product_name=ürün44&product_code=44ABCDCodes
 	// CLIENT
 	@GetMapping("client/product/post/responseentity")
@@ -204,7 +204,7 @@ public class ProductController {
 	}
 	
 	//// +++++ PUT GÜNCELLEMEK //////
-	// GÜNCELLE ==>ResponseEntity==> Object ==> @PutMapping
+	// GÜNCELLE ==>ResponseEntity==> Object ==> @GetMapping
 	// http://localhost:8080/client/product/put/responseentity?product_id=1&product_name=ürün44&product_code=44ABCDCodes
 	// CLIENT
 	@GetMapping("client/product/put/responseentity")
@@ -233,6 +233,24 @@ public class ProductController {
 		
 		return productDto + " Güncelleme Tamamdır";
 		
+	}
+	
+	//// +++++ DELETE SİLMEK //////
+	// SİLMEK ==> Object ==> @GetMapping
+	// http://localhost:8080/client/product/delete/4
+	// CLIENT
+	@GetMapping("client/product/delete/{product_id}")
+	@ResponseBody
+	public String productObjectDeleteResponseEntity(@PathVariable(name = "product_id") Long productId) {
+		
+		// PATH
+		final String URL = "http://localhost:8080/server/v1/product/delete/" + productId;
+		
+		// @RestControllerdan veri almak istiyorsam
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.exchange(URL, HttpMethod.DELETE, HttpEntity.EMPTY, Void.class);
+		
+		return productId + " nolu ID Silindi.";
 	}
 	
 }

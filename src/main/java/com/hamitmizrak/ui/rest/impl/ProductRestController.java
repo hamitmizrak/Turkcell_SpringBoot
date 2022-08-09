@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -127,7 +128,7 @@ public class ProductRestController {
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// PUT ==> PRODUCT ==> EKLE ==> @PutMapping
+	// PUT ==> PRODUCT ==> GÜNCELLEME ==> @PutMapping
 	// http://localhost:8080/server/v1/product/put/responseentity
 	// SERVER
 	// Dikkat: putMapping mutlaka ==> @RequestBody yazmalısınız
@@ -137,4 +138,13 @@ public class ProductRestController {
 		return ResponseEntity.ok(productDto);
 	}
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// DELETE ==> Void ==> SİLMEK ==> @DeleteMapping
+	// http://localhost:8080/server/v1/product/delete/1
+	// SERVER
+	// Dikkat: putMapping mutlaka ==> @RequestBody yazmalısınız
+	@DeleteMapping("product/delete/{id}")
+	public void productProductDeleteResponseEntity(@PathVariable(name = "id") Long id) {
+		log.info(ProductDto.class + " " + id + " nolu id silindi");
+	}
 }
