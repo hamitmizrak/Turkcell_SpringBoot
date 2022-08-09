@@ -32,4 +32,15 @@ public class ProductController {
 		return productDto;
 	}
 	
+	// http://localhost:8080/client/controller/path/productdto
+	// SERVER
+	@GetMapping("client/controller/path/productdto")
+	@ResponseBody
+	public ProductDto getClientPathObjectData() {
+		final String URL = "http://localhost:8080/server/v1/object/path/44";
+		RestTemplate restTemplate = new RestTemplate();
+		ProductDto productDto = restTemplate.getForObject(URL, ProductDto.class);
+		return productDto;
+	}
+	
 }
