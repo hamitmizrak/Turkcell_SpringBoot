@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
@@ -128,18 +129,18 @@ public class ProductController {
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// EKLE ==> @PostMapping
-	// http://localhost:8080/client/product/post
+	// EKLE ==>Void ==> @PostMapping
+	// http://localhost:8080/client/product/void/post
 	// CLIENT
-	@GetMapping("client/product/post")
+	@GetMapping("client/product/void/post")
 	@ResponseBody
-	public String productPost() {
+	public String productVoidPost() {
 		
 		// ProductInstance
 		ProductDto productDto = ProductDto.builder().productId(1L).productName("ürün adı").productCode("ürün kodu")
 				.productPrice(44).build();
 		// PATH
-		final String URL = "http://localhost:8080/server/v1/product/post";
+		final String URL = "http://localhost:8080/server/v1/product/void/post";
 		
 		// @RestControllerdan veri almak istiyorsam
 		RestTemplate restTemplate = new RestTemplate();
@@ -147,6 +148,29 @@ public class ProductController {
 		restTemplate.postForObject(URL, productDto, Void.class);
 		
 		return ProductDto.class + " Ekleme Tamamdır";
+		
+	}
+	
+	// EKLE ==> Object ==> @PostMapping
+	// http://localhost:8080/client/product/post?product_name=ürün44
+	// CLIENT
+	@GetMapping("client/product/post")
+	@ResponseBody
+	public String productObjectPost(@RequestParam(name = "product_name") String productName,
+			@RequestParam(name = "product_code") String productCode) {
+		
+		// ProductInstance
+		ProductDto productDto = ProductDto.builder().productId(1L).productName(productName).productCode(productCode)
+				.productPrice(44).build();
+		// PATH
+		final String URL = "localhost:8080/server/v1/product/object/post";
+		
+		// @RestControllerdan veri almak istiyorsam
+		RestTemplate restTemplate = new RestTemplate();
+		
+		ProductDto productDto2 = restTemplate.postForObject(URL, productDto, ProductDto.class);
+		
+		return productDto2 + " Ekleme Tamamdır";
 		
 	}
 	

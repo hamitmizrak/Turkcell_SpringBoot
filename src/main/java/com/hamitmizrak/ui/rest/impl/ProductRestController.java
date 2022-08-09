@@ -87,17 +87,31 @@ public class ProductRestController {
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// EKLE ==> @PostMapping
-	// http://localhost:8080/server/v1/product/post
+	// POST ==> VOID ==> EKLE ==> @PostMapping
+	// http://localhost:8080/server/v1/product/void/post
 	// SERVER
 	// Dikkat: postMapping mutlaka ==> @RequestBody yazmalısınız
-	@PostMapping("product/post")
-	public void productPost(@RequestBody ProductDto productDto) {
+	@PostMapping("product/void/post")
+	public void productVoidPost(@RequestBody ProductDto productDto) {
 		log.info(productDto);
 		// database
 		// file
 		// socket
 		// api
+	}
+	
+	// POST ==> EKLE ==> @PostMapping
+	// http://localhost:8080/server/v1/product/object/post
+	// SERVER
+	// Dikkat: postMapping mutlaka ==> @RequestBody yazmalısınız
+	@PostMapping("product/object/post")
+	public ProductDto productProductPost(@RequestBody ProductDto productDto) {
+		log.info(productDto);
+		// database
+		// file
+		// socket
+		// api
+		return productDto;
 	}
 	
 }
