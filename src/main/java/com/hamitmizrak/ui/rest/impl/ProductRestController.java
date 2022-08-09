@@ -100,7 +100,7 @@ public class ProductRestController {
 		// api
 	}
 	
-	// POST ==> EKLE ==> @PostMapping
+	// POST ==> PRODUCT ==> EKLE ==> @PostMapping
 	// http://localhost:8080/server/v1/product/object/post
 	// SERVER
 	// Dikkat: postMapping mutlaka ==> @RequestBody yazmalısınız
@@ -112,6 +112,17 @@ public class ProductRestController {
 		// socket
 		// api
 		return productDto;
+	}
+	
+	// POST ==>RESPONSEENTITY==> PRODUCT ==> EKLE ==> @PostMapping
+	// http://localhost:8080/server/v1/product/object/responseentity
+	// SERVER
+	// Dikkat: postMapping mutlaka ==> @RequestBody yazmalısınız
+	@PostMapping("product/object/responseentity")
+	public ResponseEntity<ProductDto> productProductPostResponseEntity(@RequestBody ProductDto productDto) {
+		log.info(productDto);
+		
+		return ResponseEntity.ok(productDto);
 	}
 	
 }

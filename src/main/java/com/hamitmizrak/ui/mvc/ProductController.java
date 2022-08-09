@@ -175,4 +175,32 @@ public class ProductController {
 		
 	}
 	
+	// EKLE ==>ResponseEntity==> Object ==> @PostMapping
+	// http://localhost:8080/client/product/post/responseentity?product_name=ürün44&product_code=44ABCDCodes
+	// CLIENT
+	@GetMapping("client/product/post/responseentity")
+	@ResponseBody
+	public String productObjectPostResponseEntity(@RequestParam(name = "product_name") String productName,
+			@RequestParam(name = "product_code") String productCode) {
+		
+		// ProductInstance
+		ProductDto productDto44 = ProductDto.builder().productId(1L).productName(productName).productCode(productCode)
+				.productPrice(44).build();
+		// PATH
+		final String URL = "http://localhost:8080/server/v1/product/object/responseentity";
+		
+		// @RestControllerdan veri almak istiyorsam
+		RestTemplate restTemplate = new RestTemplate();
+		
+		// Eğer restcontroller postmapping olarak ResponseEntity gönderiyorsa
+		HttpEntity<ProductDto> httpEntity = new HttpEntity<ProductDto>(productDto44);
+		ResponseEntity<ProductDto> responseEntity = restTemplate.exchange(URL, HttpMethod.POST, httpEntity,
+				ProductDto.class);
+		
+		ProductDto productDto = responseEntity.getBody();
+		
+		return productDto + " Ekleme Tamamdır";
+		
+	}
+	
 }
