@@ -152,7 +152,7 @@ public class ProductController {
 	}
 	
 	// EKLE ==> Object ==> @PostMapping
-	// http://localhost:8080/client/product/post?product_name=ürün44
+	// http://localhost:8080/client/product/post?product_name=ürün44&product_code=44ABCDCodes
 	// CLIENT
 	@GetMapping("client/product/post")
 	@ResponseBody
@@ -163,12 +163,13 @@ public class ProductController {
 		ProductDto productDto = ProductDto.builder().productId(1L).productName(productName).productCode(productCode)
 				.productPrice(44).build();
 		// PATH
-		final String URL = "localhost:8080/server/v1/product/object/post";
+		final String URL = "http://localhost:8080/server/v1/product/object/post";
 		
 		// @RestControllerdan veri almak istiyorsam
 		RestTemplate restTemplate = new RestTemplate();
 		
 		ProductDto productDto2 = restTemplate.postForObject(URL, productDto, ProductDto.class);
+		// database api fileIO eklenebilinir.
 		
 		return productDto2 + " Ekleme Tamamdır";
 		
