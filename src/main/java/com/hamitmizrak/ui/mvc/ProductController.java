@@ -203,4 +203,36 @@ public class ProductController {
 		
 	}
 	
+	//// +++++ PUT GÜNCELLEMEK //////
+	// GÜNCELLE ==>ResponseEntity==> Object ==> @PutMapping
+	// http://localhost:8080/client/product/put/responseentity?product_id=1&product_name=ürün44&product_code=44ABCDCodes
+	// CLIENT
+	@GetMapping("client/product/put/responseentity")
+	@ResponseBody
+	public String productObjectPutResponseEntity(@RequestParam(name = "product_id") Long productId,
+			@RequestParam(name = "product_name") String productName,
+			@RequestParam(name = "product_code") String productCode) {
+		
+		// ProductInstance
+		ProductDto productDto44 = ProductDto.builder().productId(productId).productName(productName)
+				.productCode(productCode).productPrice(44).build();
+		
+		// PATH
+		final String URL = "http://localhost:8080/server/v1/product/put/responseentity";
+		
+		// @RestControllerdan veri almak istiyorsam
+		RestTemplate restTemplate = new RestTemplate();
+		
+		// Eğer restcontroller postmapping olarak ResponseEntity gönderiyorsa
+		// dilerseniz HttpEntity oluşturmayı ResponseEntity yapabiliriz.
+		// HttpEntity<ProductDto> httpEntity = new HttpEntity<ProductDto>(productDto44);
+		ResponseEntity<ProductDto> responseEntity = restTemplate.exchange(URL, HttpMethod.PUT,
+				new HttpEntity<ProductDto>(productDto44), ProductDto.class);
+		
+		ProductDto productDto = responseEntity.getBody();
+		
+		return productDto + " Güncelleme Tamamdır";
+		
+	}
+	
 }

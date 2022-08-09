@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -122,6 +123,17 @@ public class ProductRestController {
 	public ResponseEntity<ProductDto> productProductPostResponseEntity(@RequestBody ProductDto productDto) {
 		log.info(productDto);
 		
+		return ResponseEntity.ok(productDto);
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// PUT ==> PRODUCT ==> EKLE ==> @PutMapping
+	// http://localhost:8080/server/v1/product/put/responseentity
+	// SERVER
+	// Dikkat: putMapping mutlaka ==> @RequestBody yazmalısınız
+	@PutMapping("product/put/responseentity")
+	public ResponseEntity<ProductDto> productProductPutResponseEntity(@RequestBody ProductDto productDto) {
+		log.info(productDto);
 		return ResponseEntity.ok(productDto);
 	}
 	
