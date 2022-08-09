@@ -36,4 +36,15 @@ public class ProductRestController {
 				.productPrice(44).build();
 		return productDto;
 	}
+	
+	// http://localhost:8080/server/v1/object/response
+	// http://localhost:8080/server/v1/object/response/44
+	// SERVER
+	@GetMapping({ "object/response", "object/response/{id}" })
+	public ProductDto sendServerResponseObjectData(@PathVariable(name = "id", required = false) Long id) {
+		ProductDto productDto = ProductDto.builder().productId(id).productName("ürün adı").productCode("ürün kodu")
+				.productPrice(23).build();
+		return productDto;
+	}
+	
 }
