@@ -1,5 +1,8 @@
 package com.hamitmizrak.ui.rest.impl;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +48,22 @@ public class ProductRestController {
 		ProductDto productDto = ProductDto.builder().productId(id).productName("ürün adı").productCode("ürün kodu")
 				.productPrice(23).build();
 		return productDto;
+	}
+	
+	// http://localhost:8080/server/v1/object/response/list
+	// SERVER
+	@GetMapping("object/response/list")
+	public List<ProductDto> sendServerResponseListObjectData() {
+		// ArrayList
+		List<ProductDto> productDtoList = new LinkedList<ProductDto>();
+		
+		// 5 tane ProductList'i oluşturdum
+		for (int i = 1; i <= 5; i++) {
+			ProductDto productDto = ProductDto.builder().productId(Long.valueOf(i)).productName("ürün adı: " + i)
+					.productCode("ürün kodu: " + i).productPrice(i * 10).build();
+			productDtoList.add(productDto);
+		}
+		return productDtoList;
 	}
 	
 }

@@ -1,5 +1,8 @@
 package com.hamitmizrak.ui.mvc;
 
+import java.util.List;
+
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -67,6 +70,23 @@ public class ProductController {
 				ProductDto.class);
 		ProductDto productDto = responseEntity.getBody();
 		return productDto;
+	}
+	
+	// http://localhost:8080/client/controller/request/list/productdto
+	// SERVER
+	// exchange ==>LIST
+	@GetMapping("client/controller/request/list/productdto")
+	@ResponseBody
+	public List<ProductDto> getClientRequestListObjectData() {
+		final String URL = "http://localhost:8080/server/v1/object/response/list";
+		
+		// @RestControllerdan veri almak istiyorsam
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<List<ProductDto>> responseEntityList = restTemplate.exchange(URL, HttpMethod.GET,
+				HttpEntity.EMPTY, new ParameterizedTypeReference<List<ProductDto>>() {
+				});
+		List<ProductDto> listProductDto = responseEntityList.getBody();
+		return listProductDto;
 	}
 	
 }
