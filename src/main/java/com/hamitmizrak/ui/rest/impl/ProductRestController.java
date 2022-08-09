@@ -3,15 +3,20 @@ package com.hamitmizrak.ui.rest.impl;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hamitmizrak.business.dto.ProductDto;
 
+import lombok.extern.log4j.Log4j2;
+
 @RestController
 @RequestMapping("/server/v1")
+@Log4j2
 public class ProductRestController {
 	
 	// http://localhost:8080/server/v1/manueljson
@@ -31,29 +36,40 @@ public class ProductRestController {
 	}
 	
 	// http://localhost:8080/server/v1/object/path
+	// http://localhost:8080/server/v1/object/path/0
 	// http://localhost:8080/server/v1/object/path/44
 	// SERVER
 	@GetMapping({ "object/path", "object/path/{id}" })
-	public ProductDto sendServerPathObjectData(@PathVariable(name = "id", required = false) Long id) {
+	@ResponseBody
+	public ResponseEntity<?> sendServerPathObjectData(@PathVariable(name = "id", required = false) Long id) {
 		ProductDto productDto = ProductDto.builder().productId(id).productName("ürün adı").productCode("ürün kodu")
 				.productPrice(44).build();
-		return productDto;
+		if (id == null) {
+			log.error("404: notfound");
+			return ResponseEntity.notFound().build();
+		} else if (id == 0) {
+			log.error("400: bad request");
+			return ResponseEntity.badRequest().build();
+		}
+		log.info(productDto);
+		return ResponseEntity.ok(productDto);
 	}
 	
 	// http://localhost:8080/server/v1/object/response
 	// http://localhost:8080/server/v1/object/response/44
 	// SERVER
 	@GetMapping({ "object/response", "object/response/{id}" })
-	public ProductDto sendServerResponseObjectData(@PathVariable(name = "id", required = false) Long id) {
+	public ResponseEntity<ProductDto> sendServerResponseObjectData(
+			@PathVariable(name = "id", required = false) Long id) {
 		ProductDto productDto = ProductDto.builder().productId(id).productName("ürün adı").productCode("ürün kodu")
 				.productPrice(23).build();
-		return productDto;
+		return ResponseEntity.ok(productDto);
 	}
 	
 	// http://localhost:8080/server/v1/object/response/list
 	// SERVER
 	@GetMapping("object/response/list")
-	public List<ProductDto> sendServerResponseListObjectData() {
+	public ResponseEntity<List<ProductDto>> sendServerResponseListObjectData() {
 		// ArrayList
 		List<ProductDto> productDtoList = new LinkedList<ProductDto>();
 		
@@ -63,7 +79,7 @@ public class ProductRestController {
 					.productCode("ürün kodu: " + i).productPrice(i * 10).build();
 			productDtoList.add(productDto);
 		}
-		return productDtoList;
+		return ResponseEntity.ok(productDtoList);
 	}
 	
 }

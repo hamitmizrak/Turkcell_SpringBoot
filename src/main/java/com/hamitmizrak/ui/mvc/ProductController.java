@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,8 +18,17 @@ import com.hamitmizrak.business.dto.ProductDto;
 @Controller
 public class ProductController {
 	
+	// NOT
+	// ResponseEntity ==> kullanmıyorsak
+	// ProductDto dto=restTemplate.getForObject(URL,ProductDto.class);
+	
+	// ResponseEntity ==> kullanıyorsak
+	// ResponseEntity<ProductDto> responseEntity = restTemplate.exchange(URL,
+	// HttpMethod.GET, HttpEntity.EMPTY,ProductDto.class);
+	
 	// http://localhost:8080/client/controller/string
 	// CLIENT
+	// ResponseEntity gelmiyor ==> getForObject(URL,data.class)
 	@GetMapping("client/controller/string")
 	@ResponseBody
 	public String getClientData() {
@@ -32,6 +42,7 @@ public class ProductController {
 	
 	// http://localhost:8080/client/controller/productdto
 	// CLIENT
+	// ResponseEntity gelmiyor ==> getForObject(URL,data.class)
 	@GetMapping("client/controller/productdto")
 	@ResponseBody
 	public ProductDto getClientObjectData() {
@@ -43,17 +54,24 @@ public class ProductController {
 		return productDto;
 	}
 	
+	//// ResponseEntity ++++++++++////////////////////////////////////
 	// http://localhost:8080/client/controller/path/productdto
+	// http://localhost:8080/client/controller/path/productdto/0
+	// http://localhost:8080/client/controller/path/productdto/44
 	// CLIENT
 	// getForObject
-	@GetMapping("client/controller/path/productdto")
+	// ResponseEntity gelmiyor ==> getForObject(URL,data.class)
+	@GetMapping("client/controller/path/productdto/{id}")
 	@ResponseBody
-	public ProductDto getClientPathObjectData() {
-		final String URL = "http://localhost:8080/server/v1/object/path/44";
+	public ProductDto getClientPathObjectData(@PathVariable(name = "id") Long id) {
+		
+		final String URL = "http://localhost:8080/server/v1/object/path/" + id;
 		
 		// @RestControllerdan veri almak istiyorsam
 		RestTemplate restTemplate = new RestTemplate();
-		ProductDto productDto = restTemplate.getForObject(URL, ProductDto.class);
+		ResponseEntity<ProductDto> responseEntity = restTemplate.exchange(URL, HttpMethod.GET, HttpEntity.EMPTY,
+				ProductDto.class);
+		ProductDto productDto = responseEntity.getBody();
 		return productDto;
 	}
 	
@@ -89,14 +107,6 @@ public class ProductController {
 		List<ProductDto> listProductDto = responseEntityList.getBody();
 		return listProductDto;
 	}
-	
-	// NOT
-	// ResponseEntity ==> kullanmıyorsak
-	// ProductDto dto=restTemplate.getForObject(URL,ProductDto.class);
-	
-	// ResponseEntity ==> kullanıyorsak
-	// ResponseEntity<ProductDto> responseEntity = restTemplate.exchange(URL,
-	// HttpMethod.GET, HttpEntity.EMPTY,ProductDto.class);
 	
 	// http://localhost:8080/client/controller/request/list/thymeleaf/productdto
 	// CLIENT
