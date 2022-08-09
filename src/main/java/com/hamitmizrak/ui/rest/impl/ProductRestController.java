@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +37,7 @@ public class ProductRestController {
 		return productDto;
 	}
 	
+	///////////////////// ResponseEntity////////////////////////////////////////////////////////////////////////////////////////
 	// http://localhost:8080/server/v1/object/path
 	// http://localhost:8080/server/v1/object/path/0
 	// http://localhost:8080/server/v1/object/path/44
@@ -80,6 +83,21 @@ public class ProductRestController {
 			productDtoList.add(productDto);
 		}
 		return ResponseEntity.ok(productDtoList);
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// EKLE ==> @PostMapping
+	// http://localhost:8080/server/v1/product/post
+	// SERVER
+	// Dikkat: postMapping mutlaka ==> @RequestBody yazmalısınız
+	@PostMapping("product/post")
+	public void productPost(@RequestBody ProductDto productDto) {
+		log.info(productDto);
+		// database
+		// file
+		// socket
+		// api
 	}
 	
 }

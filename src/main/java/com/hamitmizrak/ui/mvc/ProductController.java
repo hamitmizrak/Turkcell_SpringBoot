@@ -126,4 +126,28 @@ public class ProductController {
 		return "product_dto_rest_mvc";
 	}
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// EKLE ==> @PostMapping
+	// http://localhost:8080/client/product/post
+	// CLIENT
+	@GetMapping("client/product/post")
+	@ResponseBody
+	public String productPost() {
+		
+		// ProductInstance
+		ProductDto productDto = ProductDto.builder().productId(1L).productName("ürün adı").productCode("ürün kodu")
+				.productPrice(44).build();
+		// PATH
+		final String URL = "http://localhost:8080/server/v1/product/post";
+		
+		// @RestControllerdan veri almak istiyorsam
+		RestTemplate restTemplate = new RestTemplate();
+		
+		restTemplate.postForObject(URL, productDto, Void.class);
+		
+		return ProductDto.class + " Ekleme Tamamdır";
+		
+	}
+	
 }
