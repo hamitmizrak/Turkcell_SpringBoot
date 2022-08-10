@@ -255,21 +255,45 @@ public class ProductController {
 		return productId + " nolu ID Silindi.";
 	}
 	
-	////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// HEADER
-	// CLIENT ==> @Controller
-	// http://localhost:8080/controller/header
-	@GetMapping("controller/header")
+	// Request ==> @Controller
+	// Response ==> @RestController
+	// http://localhost:8080/controller/request/header
+	@GetMapping("controller/request/header")
 	@ResponseBody
-	public String getControllerHeader() {
+	public String getControllerRequestHeader() {
+		// URL
+		final String URL = "http://localhost:8080/server/v1/restcontroller/response/header";
+		
+		// Template
+		RestTemplate restTemplate = new RestTemplate();
+		
+		ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.GET, HttpEntity.EMPTY,
+				String.class);
+		String gelenData = responseEntity.getHeaders().getFirst("key_restcontroller_header");
+		String body = responseEntity.getBody();
+		
+		return "@Controller:" + body + " " + gelenData;
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// HEADER
+	// Dikkat : Önce @Controller Tıklamalıyız
+	// Request ==> @RestController
+	// Response ==> @Controller
+	// http://localhost:8080/controller/response/header
+	@GetMapping("controller/response/header")
+	@ResponseBody
+	public String getControllerResponseHeader() {
 		
 		// URL
-		final String URL = "http://localhost:8080/server/v1/restcontroller/header";
+		final String URL = "http://localhost:8080/server/v1/restcontroller/request/header";
 		
 		// @RestControllerdan Header verisi
+		// Header'a veri ekledik
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add("key_header", "Controller Verileri");
-		
+		httpHeaders.add("key_controller_header", "@Controller Verileri");
 		HttpEntity<String> httpEntity = new HttpEntity<String>("other", httpHeaders);
 		
 		// Template

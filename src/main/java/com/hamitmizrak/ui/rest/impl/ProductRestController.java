@@ -155,12 +155,26 @@ public class ProductRestController {
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// ROLLER DEĞİŞTİ
 	// HEADER
-	// SERVER ==> @RestController
-	// http://localhost:8080/server/v1/restcontroller/header
-	@GetMapping("restcontroller/header")
-	public ResponseEntity<?> getRestControllerHeader(
-			@RequestHeader(value = "key_header", defaultValue = "default data yazdım") String data) {
+	// Request ==> @Controller
+	// Response ==> @RestController
+	// http://localhost:8080/server/v1/restcontroller/response/header
+	@GetMapping("restcontroller/response/header")
+	public ResponseEntity<?> getRestControllerResponseHeader() {
+		return ResponseEntity.ok().header("key_restcontroller_header", "@RestController Verileri")
+				.body("@RestController Body");
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// HEADER
+	// Request ==> @RestController
+	// Response ==> @Controller
+	// http://localhost:8080/server/v1/restcontroller/request/header
+	@GetMapping("restcontroller/request/header")
+	public ResponseEntity<?> getRestControllerRequestHeader(
+			@RequestHeader(value = "key_controller_header", defaultValue = "default data yazdım") String data) {
+		// @Controllerdaki oluşturulmuş Headeri @RestController aldı
 		String headerData = "@ResponseController: " + data;
 		log.error("@RestController ==> " + headerData);
 		return ResponseEntity.ok(headerData);
