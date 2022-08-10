@@ -304,4 +304,27 @@ public class ProductController {
 		return body;
 	}
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// COOKE
+	// Request ==> @Controller
+	// Response ==> @RestController
+	// http://localhost:8080/controller/request/cookie
+	@GetMapping("controller/request/cookie")
+	@ResponseBody
+	public String getControllerRequestCookie() {
+		// URL
+		final String URL = "http://localhost:8080/server/v1/restcontroller/response/cookie";
+		
+		// Template
+		RestTemplate restTemplate = new RestTemplate();
+		
+		ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.GET, HttpEntity.EMPTY,
+				String.class);
+		String gelenData = responseEntity.getHeaders().getFirst(HttpHeaders.SET_COOKIE);
+		String body = responseEntity.getBody();
+		
+		return "@Controller:" + body + " " + gelenData;
+	}
+	
 }

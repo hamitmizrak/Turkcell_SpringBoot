@@ -3,6 +3,7 @@ package com.hamitmizrak.ui.rest.impl;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -155,7 +156,8 @@ public class ProductRestController {
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// ROLLER DEĞİŞTİ
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	// HEADER
 	// Request ==> @Controller
 	// Response ==> @RestController
@@ -167,6 +169,7 @@ public class ProductRestController {
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// ROLLER DEĞİŞTİ
 	// HEADER
 	// Request ==> @RestController
 	// Response ==> @Controller
@@ -178,6 +181,20 @@ public class ProductRestController {
 		String headerData = "@ResponseController: " + data;
 		log.error("@RestController ==> " + headerData);
 		return ResponseEntity.ok(headerData);
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// COOKIE
+	// Request ==> @Controller
+	// Response ==> @RestController
+	// import org.springframework.http.HttpHeaders;
+	// http://localhost:8080/server/v1/restcontroller/response/cookie
+	@GetMapping("restcontroller/response/cookie")
+	public ResponseEntity<?> getRestControllerResponseCookie() {
+		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, "key_restcontroller_cookie")
+				.body("@RestController Coookie Body");
 	}
 	
 }
