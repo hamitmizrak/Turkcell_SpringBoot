@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import lombok.extern.log4j.Log4j2;
 @RestController
 @RequestMapping("/server/v1")
 @Log4j2
+@CrossOrigin
 public class ProductRestController {
 	
 	// @RestController
@@ -154,6 +156,17 @@ public class ProductRestController {
 	@DeleteMapping("product/delete/{id}")
 	public void productProductDeleteResponseEntity(@PathVariable(name = "id") Long id) {
 		log.info(ProductDto.class + " " + id + " nolu id silindi");
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// @RestController ==> jQuery'e veri göndermek ve Html5 üzerinde veri göstermek
+	
+	// http://localhost:8080/server/v1/restcontroller/jquery/cors
+	@CrossOrigin
+	@GetMapping("restcontroller/jquery/cors")
+	public String getJquery() {
+		return "Merhababalar ben Java RestControllardan geldim";
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
