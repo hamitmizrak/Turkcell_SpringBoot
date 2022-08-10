@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,11 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/server/v1")
 @Log4j2
 public class ProductRestController {
+	
+	// @RestController
+	// @RequestMapping()
+	// @RequestBody
+	// @RequestHeader
 	
 	// http://localhost:8080/server/v1/manueljson
 	// SERVER
@@ -147,4 +153,17 @@ public class ProductRestController {
 	public void productProductDeleteResponseEntity(@PathVariable(name = "id") Long id) {
 		log.info(ProductDto.class + " " + id + " nolu id silindi");
 	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// HEADER
+	// SERVER ==> @RestController
+	// http://localhost:8080/server/v1/restcontroller/header
+	@GetMapping("restcontroller/header")
+	public ResponseEntity<?> getRestControllerHeader(
+			@RequestHeader(value = "key_header", defaultValue = "default data yazdım") String data) {
+		String headerData = "@ResponseController: " + data;
+		log.error("@RestController ==> " + headerData);
+		return ResponseEntity.ok(headerData);
+	}
+	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,10 @@ import org.springframework.web.client.RestTemplate;
 
 import com.hamitmizrak.business.dto.ProductDto;
 
+import lombok.extern.log4j.Log4j2;
+
 @Controller
+@Log4j2
 public class ProductController {
 	
 	// NOT
@@ -249,6 +253,31 @@ public class ProductController {
 		restTemplate.exchange(URL, HttpMethod.DELETE, HttpEntity.EMPTY, Void.class);
 		
 		return productId + " nolu ID Silindi.";
+	}
+	
+	////////////////////////////////////////////////////////////////////////////////
+	// HEADER
+	// CLIENT ==> @Controller
+	// http://localhost:8080/controller/header
+	@GetMapping("controller/header")
+	@ResponseBody
+	public String getControllerHeader() {
+		
+		// URL
+		final String URL = "http://localhost:8080/server/v1/restcontroller/header";
+		
+		// @RestControllerdan Header verisi
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("key_header", "Controller Verileri");
+		
+		HttpEntity<String> httpEntity = new HttpEntity<String>("other", httpHeaders);
+		
+		// Template
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.GET, httpEntity, String.class);
+		String body = responseEntity.getBody();
+		log.error("@Controller ==> " + body);
+		return body;
 	}
 	
 }
