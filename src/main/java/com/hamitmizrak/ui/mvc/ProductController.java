@@ -309,6 +309,7 @@ public class ProductController {
 	// COOKE
 	// Request ==> @Controller
 	// Response ==> @RestController
+	// import org.springframework.http.HttpHeaders;
 	// http://localhost:8080/controller/request/cookie
 	@GetMapping("controller/request/cookie")
 	@ResponseBody
@@ -325,6 +326,34 @@ public class ProductController {
 		String body = responseEntity.getBody();
 		
 		return "@Controller:" + body + " " + gelenData;
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// COOKIE
+	// Dikkat : Önce @Controller Tıklamalıyız
+	// Request ==> @RestController
+	// Response ==> @Controller
+	// http://localhost:8080/controller/response/cookie
+	@GetMapping("controller/response/cookie")
+	@ResponseBody
+	public String getControllerResponseCookie() {
+		
+		// URL
+		final String URL = "http://localhost:8080/server/v1/restcontroller/request/cookie";
+		
+		// Template
+		RestTemplate restTemplate = new RestTemplate();
+		
+		// @RestControllerdan Header verisi
+		// Cookie veri ekledik
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add(HttpHeaders.COOKIE, "key_controller_response_cookie=bencerezim");
+		HttpEntity<String> httpEntity = new HttpEntity<String>("other", httpHeaders);
+		
+		ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.GET, httpEntity, String.class);
+		String body = responseEntity.getBody();
+		log.error("@Controller Cookie ==> " + body);
+		return "@Controller Cookie ==> " + body;
 	}
 	
 }

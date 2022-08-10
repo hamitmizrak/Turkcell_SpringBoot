@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -195,6 +196,21 @@ public class ProductRestController {
 	public ResponseEntity<?> getRestControllerResponseCookie() {
 		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, "key_restcontroller_cookie")
 				.body("@RestController Coookie Body");
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// ROLLER DEĞİŞTİ
+	// COOKIE
+	// Request ==> @RestController
+	// Response ==> @Controller
+	// http://localhost:8080/server/v1/restcontroller/request/cookie
+	@GetMapping("restcontroller/request/cookie")
+	public ResponseEntity<?> getRestControllerRequestCookie(
+			@CookieValue(value = "key_controller_response_cookie", defaultValue = "default cookie değeri") String data) {
+		// @Controllerdaki oluşturulmuş Cookie @RestController aldı
+		String headerData = "@ResponseController: " + data;
+		log.error("@RestController ==> " + headerData);
+		return ResponseEntity.ok(headerData);
 	}
 	
 }
