@@ -34,21 +34,45 @@
 
     <link rel="stylesheet" th:href="@{/css/template.css}">
     <script th:src="@{/js/template.js}"></script>
-
 </head>
 
-<body class="container bg-dark44 text-warning">
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Logo</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/index}">Anasayfa <span class="visually-hidden"></span></a>
+                    </li>
 
- <p class="display-4 mt-5 mb-5">Secret Admin Page</p>
-<a th:href="@{/admin/logout}">LOGOUT</a>
+                    <li class="nav-item">
+                        <i class="fa-solid fa-user-gear"></i>
+                        <span th:text="${admin_name_key}" class="text-white">
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/logout}">Logout</a>
+                    </li>
+                </ul>
+                <form class="d-flex my-2 my-lg-0">
+                    <input class="form-control me-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
 
- <p  th:text="${key_logout}" class="display-4 text-danger"></p>
+<p class="display-4 mt-5 mb-5">Secret Admin Page</p>
+<p th:text="${admin_hashCode_key}" class="display-4 text-danger"></p>
+<p th:text="${admin_name_key}" class="display-4 text-danger"></p>
+<p  th:text="${key_logout}" class="display-4 text-danger"></p>
 
-   
-   
-   
-  
-   
  <!-- ends codes -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>

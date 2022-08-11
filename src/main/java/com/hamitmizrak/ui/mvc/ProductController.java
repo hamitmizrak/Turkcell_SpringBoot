@@ -387,8 +387,17 @@ public class ProductController {
 	// http://localhost:8080/admin/index
 	// DİKKATTTT: url path oluşturulurken başına slash(/) eklemeliyiz
 	@GetMapping("/admin/index")
-	public String getAdmin() {
-		return "admin/index";
+	public String getAdmin(Model model) {
+		// Sistemdeki Kullanıcı Bilgilerine ulaşmak
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null) {
+			model.addAttribute("admin_hashCode_key", authentication.hashCode());
+			model.addAttribute("admin_name_key", authentication.getName());
+			return "admin/index";
+		} else {
+			return "/";
+		}
+		
 	}
 	
 	// LOGOUT
