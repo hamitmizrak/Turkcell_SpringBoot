@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import com.hamitmizrak.bean.PasswordEncoderMyBean;
+
 // Yukarıdaki kod aslında @SpringBootApplication'da yazdığımız Exclude ile
 // aynıdır'
 // WebSecurity kapatmak
@@ -31,14 +33,25 @@ public class _01_Security extends WebSecurityConfigurerAdapter {
 	
 	// Bu metotu ben yazdım ==> myUserPasswordRoles
 	// bu metotudun görevi yeni kullanıcı eklemek ve o kullanıcıya rol vermek
+	
+	@Autowired
+	PasswordEncoderMyBean passwordEncoderMyBean;
+	
 	@Autowired
 	public void myUserPasswordRoles(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-		// inMemoryAuthentication=Database üzerinden değil Spring içinde bu veriler
-		// //NoEncrpted: yani Maskesiz saklanacak noop:Spring üzerinden maskelenmeden
+		// inMemoryAuthentication = Database üzerinden değil Spring içinde bu veriler
+		// NoEncrypted: yani Maskesiz saklanacak noop:Spring üzerinden maskelenmeden
 		// sakalama yarar.
-		authenticationManagerBuilder.inMemoryAuthentication().withUser("hamitmizrak").password("{noop}root")
-				.roles("ADMIN");
+		// UNUTMA: ROLLER BÜYÜK HARFLE YAZILIR.
+		// authenticationManagerBuilder.inMemoryAuthentication().withUser("hamitmizrak").password("{noop}root").roles("ADMIN");
 		
+		// Encrypted: Maskeli olması sha-1 sha-256
+		// PasswordEncoder passwordEncoder =
+		// PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		
+		// Eğer Sürekli ben PasswordEncoder kullancaksam niye @Bean oluşturmuyorum ???
+		authenticationManagerBuilder.inMemoryAuthentication().withUser("hamitmizrak")
+				.password(passwordEncoderMyBean.passwordEncoderMethod().encode("root")).roles("ADMIN");
 	}
 	
 }
