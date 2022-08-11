@@ -357,4 +357,24 @@ public class ProductController {
 		return "@Controller Cookie ==> " + body;
 	}
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// SECURITY
+	// http://localhost:8080/security/public
+	// DİKKATTTT: url path oluşturulurken başına slash(/) eklemeliyiz
+	@GetMapping("/security/public")
+	@ResponseBody
+	public String getPublic() {
+		return "public Page Welcome";
+	}
+	
+	// SECURITY
+	// http://localhost:8080/security/private
+	// DİKKATTTT: url path oluşturulurken başına slash(/) eklemeliyiz
+	@GetMapping("/security/private")
+	@ResponseBody
+	public String getPrivate() {
+		return "private Page Welcome";
+	}
+	
 }

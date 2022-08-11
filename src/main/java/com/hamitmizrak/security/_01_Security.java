@@ -28,15 +28,25 @@ public class _01_Security extends WebSecurityConfigurerAdapter {
 		// http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
 		
 		// formRegister üzerinden sisteme giriş
-		http.authorizeRequests().anyRequest().authenticated().and().formLogin();
+		// http.authorizeRequests().anyRequest().authenticated().and().formLogin();
+		
+		// Kimlik Doğrulama: Authentication
+		// antMatchers:Sadece bu sayfalar şifre girmeden sisteme girebilir.
+		// http://localhost:8080/security/private
+		// http://localhost:8080/security/public
+		http.authorizeRequests().antMatchers("/", "/index", "login").permitAll().antMatchers("/security/public")
+				.permitAll().anyRequest().authenticated().and().formLogin();
 	}
 	
-	// Bu metotu ben yazdım ==> myUserPasswordRoles
-	// bu metotudun görevi yeni kullanıcı eklemek ve o kullanıcıya rol vermek
+	// http://localhost:8080/security/public
+	// http://localhost:8080/security/private
 	
+	// Eğer Sürekli ben PasswordEncoder kullancaksam niye @Bean oluşturmuyorum ???
 	@Autowired
 	PasswordEncoderMyBean passwordEncoderMyBean;
 	
+	// Bu metotu ben yazdım ==> myUserPasswordRoles
+	// bu metotudun görevi yeni kullanıcı eklemek ve o kullanıcıya rol vermek
 	@Autowired
 	public void myUserPasswordRoles(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
 		// inMemoryAuthentication = Database üzerinden değil Spring içinde bu veriler
