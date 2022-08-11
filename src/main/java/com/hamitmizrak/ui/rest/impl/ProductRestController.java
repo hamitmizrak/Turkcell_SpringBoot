@@ -169,10 +169,10 @@ public class ProductRestController {
 		return "Merhababalar ben Java RestControllardan geldim";
 	}
 	
-	// Reflection
-	// Annotaion
-	// Semophore
-	// Thread + Semophore
+	// Reflection +Annotaion
+	// Java 8 Stream
+	// Java 8 Optional
+	// Thread + Semophore +synchronized
 	//
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////

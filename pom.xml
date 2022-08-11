@@ -169,11 +169,21 @@
 
 
         <!-- Libraries Tools -->
-        <!--actuator:saglikli calisiyor mu-->
+        <!--actuator:Prometheus için gerekli olacak saglikli calisiyor mu-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        
+        
+        <!--  Prometheus: Prometheus için gerekli olacak -->
+        <!-- Prometheus:System %of Memoryconsumption ,of CPU consumption -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        
 
         <!--devtools:otomatik compiler icin-->
         <dependency>
