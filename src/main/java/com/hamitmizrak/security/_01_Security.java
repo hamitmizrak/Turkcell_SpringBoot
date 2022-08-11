@@ -35,7 +35,8 @@ public class _01_Security extends WebSecurityConfigurerAdapter {
 		// http://localhost:8080/security/private
 		// http://localhost:8080/security/public
 		http.authorizeRequests().antMatchers("/", "/index", "login").permitAll().antMatchers("/security/public")
-				.permitAll().anyRequest().authenticated().and().formLogin();
+				.permitAll().antMatchers("/admin/logout").permitAll().anyRequest().authenticated().and().formLogin()
+				.and().logout().logoutUrl("/admin/logout").invalidateHttpSession(true);
 	}
 	
 	// http://localhost:8080/security/public

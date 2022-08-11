@@ -2,11 +2,17 @@ package com.hamitmizrak.ui.mvc;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -375,6 +381,33 @@ public class ProductController {
 	@ResponseBody
 	public String getPrivate() {
 		return "private Page Welcome";
+	}
+	
+	// SECURITY
+	// http://localhost:8080/admin/index
+	// DİKKATTTT: url path oluşturulurken başına slash(/) eklemeliyiz
+	@GetMapping("/admin/index")
+	public String getAdmin() {
+		return "admin/index";
+	}
+	
+	// LOGOUT
+	// http://localhost:8080/admin/logout
+	// DİKKATTTT: url path oluşturulurken başına slash(/) eklemeliyiz
+	// Authentication: import org.springframework.security.core.Authentication;
+	@GetMapping("/admin/logout")
+	public String getLogout(HttpServletRequest request, HttpServletResponse response, Model model) {
+		// sayfamıza giriş yapmış kişiyi gösterir.
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		// sistemde birisi varsa
+		if (authentication != null) {
+			new SecurityContextLogoutHandler().logout(request, response, authentication);
+			model.addAttribute("key_logout", "Çıkış Başarılı");
+			return "admin/logout";
+		} else {
+			model.addAttribute("key_logout", "Başarısız Çıkış");
+		}
+		return "admin/index";
 	}
 	
 }
