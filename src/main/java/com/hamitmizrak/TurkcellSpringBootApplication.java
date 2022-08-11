@@ -5,9 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 // websecurity exclude
-@SpringBootApplication(exclude = {
-		org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
-		org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class })
+// @SpringBootApplication(exclude = {
+// org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
+// org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class
+// })
+
+@SpringBootApplication
 
 // Auditing
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
