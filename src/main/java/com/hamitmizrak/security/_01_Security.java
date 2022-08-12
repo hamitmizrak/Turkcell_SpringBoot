@@ -61,8 +61,9 @@ public class _01_Security extends WebSecurityConfigurerAdapter {
 		// PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		
 		// Eğer Sürekli ben PasswordEncoder kullancaksam niye @Bean oluşturmuyorum ???
-		authenticationManagerBuilder.inMemoryAuthentication().withUser("hamitmizrak")
-				.password(passwordEncoderMyBean.passwordEncoderMethod().encode("root")).roles("ADMIN");
+		authenticationManagerBuilder.inMemoryAuthentication().withUser("admin")
+				.password(passwordEncoderMyBean.passwordEncoderMethod().encode("root")).roles("ADMIN").and()
+				.withUser("writer").password(passwordEncoderMyBean.passwordEncoderMethod().encode("root"))
+				.roles("WRITER");
 	}
-	
 }

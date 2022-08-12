@@ -32,6 +32,23 @@
 <!--dependencies-->
 	<dependencies>
 	
+	   <!--  Prometheus: Prometheus için gerekli olacak -->
+        <!-- Prometheus:System %of Memoryconsumption ,of CPU consumption -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        
+
+        <!--devtools:otomatik compiler icin-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>runtime</scope>
+        </dependency>
+	
 	        <!-- web jar Bootstrap-->
         <dependency>
             <groupId>org.webjars</groupId>
@@ -173,24 +190,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        
-        
-        <!--  Prometheus: Prometheus için gerekli olacak -->
-        <!-- Prometheus:System %of Memoryconsumption ,of CPU consumption -->
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-prometheus</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        
-
-        <!--devtools:otomatik compiler icin-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-            <scope>runtime</scope>
         </dependency>
 
         <!--application.properties ==> application.yml-->
